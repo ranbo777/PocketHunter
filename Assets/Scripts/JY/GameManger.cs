@@ -42,10 +42,17 @@ public class GameManger : MonoBehaviour
     public RectTransform BossHealthGroup;
     public RectTransform BossHealthBar;
 
+    //  보스 정보를 가지고 있는 변수.
+    BossFSM bF;
+    float temp;
+
 
     // Start is called before the first frame update
     void Awake()
     {
+        bF = GameObject.Find("Boss").GetComponent<BossFSM>();
+        //  보스 체력에 비례한 보스체력바 비율
+        temp = BossHealthBar.rect.width / bF.bossHp;
         // 메인 메뉴의 현재 시간 초
         //int hour = (int)(playTime / 3600);
         //int min = (int)((playTime - hour * 3600) / 60);
@@ -57,6 +64,7 @@ public class GameManger : MonoBehaviour
 
     public void GameStart()
     {
+
 
         isBattle = true;
 
@@ -74,7 +82,8 @@ public class GameManger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //  현재 보스 체력을 보스 체력 UI에 설정.
+        BossHealthBar.sizeDelta = new Vector2(temp * bF.bossHp , 20);
 
         if (isBattle == true)
         {

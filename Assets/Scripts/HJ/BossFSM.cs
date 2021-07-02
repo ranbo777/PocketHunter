@@ -15,6 +15,12 @@ public class BossFSM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //  보스 hp가 0 밑으로 내려가지 않게 설정.
+        bossHp = Mathf.Max(0, bossHp);
+    }
+
+    public void TakeDamage(float p)
+    {
+        bossHp -= p;
     }
 }

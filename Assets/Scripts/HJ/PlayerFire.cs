@@ -8,6 +8,7 @@ public class PlayerFire : MonoBehaviour
     public List<GameObject> magazine = new List<GameObject>();
     public int magazineValue = 10;
     public GameObject pool;
+    public float attackValue = 2.0f;
 
 
     private void Start()
@@ -30,7 +31,7 @@ public class PlayerFire : MonoBehaviour
                     if (magazine[i].activeInHierarchy == false)
                     {
                         magazine[i].SetActive(true);
-                        magazine[i].transform.position = transform.GetChild(0).transform.position;
+                        magazine[i].transform.position = transform.position;
                         break;
                     }
                 }
