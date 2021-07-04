@@ -10,17 +10,23 @@ public class PlayerMove : MonoBehaviour
     public float moveSpeed = 1.0f;
     CharacterController cc;
     float temp;
+    float time = 0;
     float yVelocity = 5.0f;
+    float dodgeCooltime = 1.0f;
+    bool check = false;
 
     void Start()
     {
         temp = moveSpeed;
         cc = gameObject.GetComponent<CharacterController>();
+        time = dodgeCooltime;
     }
 
     
     void Update()
     {
+        time += Time.deltaTime;
+
         #region 플레이어 이동
         Vector3 move = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         move = Camera.main.transform.TransformDirection(move);
@@ -28,13 +34,16 @@ public class PlayerMove : MonoBehaviour
         move.y = 0;
 
         //  플레이어 이동
-        cc.Move(move * moveSpeed * Time.deltaTime);
+        if(check == false)
+        {
+            cc.Move(move * moveSpeed * Time.deltaTime);
+        }        
         cc.Move(new Vector3(0, -yVelocity, 0));
 
         //  대쉬 기능
         if (Input.GetButton("Dash") && !Input.GetButton("Zoom"))
         {
-            moveSpeed = temp * 3;
+            moveSpeed = temp * 2;
         }
         else
         {
@@ -50,11 +59,30 @@ public class PlayerMove : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, rotate, 15.0f*Time.deltaTime);
         }
 
+        //  플레이어 회피
+        if (time >= dodgeCooltime)
+        {
+            if (Input.GetButtonDown("Dodge"))
+            {
+                check = true;
+                time = 0;
+            }
+        }
+        if(check == true)
+        {
+            cc.Move(move * 15 * Time.deltaTime);
+            Invoke("CheckOff", 0.12f);
+        }
         //  줌 상태일 때 속도 제한.
-        if (Input.GetButton("Zoom"))
+            if (Input.GetButton("Zoom"))
         {
             moveSpeed = temp / 2;
         }        
+    }
 
+    //  플레이어 회피 기능 함수
+    void CheckOff()
+    {
+        check = false;
     }
 }
