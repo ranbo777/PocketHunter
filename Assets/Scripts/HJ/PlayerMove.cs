@@ -11,8 +11,10 @@ public class PlayerMove : MonoBehaviour
     CharacterController cc;
     float temp;
     float time = 0;
-    float yVelocity = 5.0f;
+    float gravity = -0.8f;
+    float yVelocity = 0;
     float dodgeCooltime = 1.0f;
+    float jumpPower = 0.2f;
     bool check = false;
 
     void Start()
@@ -22,7 +24,7 @@ public class PlayerMove : MonoBehaviour
         time = dodgeCooltime;
     }
 
-    
+
     void Update()
     {
         time += Time.deltaTime;
@@ -34,11 +36,12 @@ public class PlayerMove : MonoBehaviour
         move.y = 0;
 
         //  플레이어 이동
-        if(check == false)
+        if (check == false)
         {
             cc.Move(move * moveSpeed * Time.deltaTime);
-        }        
-        cc.Move(new Vector3(0, -yVelocity, 0));
+        }
+        yVelocity += gravity * Time.deltaTime;
+        cc.Move(new Vector3(0, yVelocity, 0));
 
         //  대쉬 기능
         if (Input.GetButton("Dash") && !Input.GetButton("Zoom"))
@@ -54,9 +57,15 @@ public class PlayerMove : MonoBehaviour
         //  플레이어 회전
         if (move != Vector3.zero)
         {
-            Quaternion rotate = Quaternion.LookRotation(new Vector3(move.x, 0 , move.z));
-            
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotate, 15.0f*Time.deltaTime);
+            Quaternion rotate = Quaternion.LookRotation(new Vector3(move.x, 0, move.z));
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotate, 15.0f * Time.deltaTime);
+        }
+
+        //  플레이어 점프
+        if (Input.GetButtonDown("Jump"))
+        {
+            yVelocity = jumpPower;
         }
 
         //  플레이어 회피
@@ -68,19 +77,19 @@ public class PlayerMove : MonoBehaviour
                 time = 0;
             }
         }
-        if(check == true)
+        if (check == true)
         {
             cc.Move(move * 15 * Time.deltaTime);
             Invoke("CheckOff", 0.12f);
         }
         //  줌 상태일 때 속도 제한.
-            if (Input.GetButton("Zoom"))
+        if (Input.GetButton("Zoom"))
         {
             moveSpeed = temp / 2;
-        }        
+        }
     }
 
-    //  플레이어 회피 기능 함수
+    //  체크 Off 함수
     void CheckOff()
     {
         check = false;
