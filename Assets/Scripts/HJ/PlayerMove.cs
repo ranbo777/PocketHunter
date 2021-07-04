@@ -27,7 +27,7 @@ public class PlayerMove : MonoBehaviour
         move.Normalize();
         move.y = 0;
 
-
+        //  플레이어 이동
         cc.Move(move * moveSpeed * Time.deltaTime);
         cc.Move(new Vector3(0, -yVelocity, 0));
 
@@ -41,6 +41,8 @@ public class PlayerMove : MonoBehaviour
             moveSpeed = temp;
         }
         #endregion
+
+        //  플레이어 회전
         if (move != Vector3.zero)
         {
             Quaternion rotate = Quaternion.LookRotation(new Vector3(move.x, 0 , move.z));
@@ -48,6 +50,7 @@ public class PlayerMove : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, rotate, 15.0f*Time.deltaTime);
         }
 
+        //  줌 상태일 때 속도 제한.
         if (Input.GetButton("Zoom"))
         {
             moveSpeed = temp / 2;

@@ -14,14 +14,12 @@ public class BossFSM : MonoBehaviour
             hp = value;
         }
     }
- 
-    // Start is called before the first frame update
+
     void Start()
     {
         HP = maxBossHP;
     }
 
-    // Update is called once per frame
     void Update()
     {
         //  보스 hp가 0 밑으로 내려가지 않게 설정.

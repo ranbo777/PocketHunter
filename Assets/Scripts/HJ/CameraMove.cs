@@ -33,7 +33,7 @@ public class CameraMove : MonoBehaviour
 
     void LateUpdate()
     {
-
+        #region 원거리 줌 기능
         if (!Input.GetButton("Zoom"))
         {
             yMove = 0;
@@ -46,7 +46,7 @@ public class CameraMove : MonoBehaviour
             target.transform.rotation = transform.rotation;                
             transform.position = target.transform.position + transform.rotation * new Vector3(0, 0.5f, 0);            
         }
-
+        #endregion
         Debug.DrawRay(transform.position, transform.forward, Color.blue);
         
     }

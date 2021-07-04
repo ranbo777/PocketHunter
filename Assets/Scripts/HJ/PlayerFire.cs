@@ -13,11 +13,12 @@ public class PlayerFire : MonoBehaviour
 
     private void Start()
     {
+        //  플레이어의 공격 타입이 근거리일 경우 원거리 공격 관련 스크립트 비활성화. 
         if (GameManger.playerWeaponType == false)
         {
             gameObject.GetComponent<PlayerFire>().enabled = false;
         }
-
+        //  탄환 할당.
         for(int i=0; i<magazineValue; i++)
         {
             magazine.Add(Instantiate(bullet));
@@ -40,7 +41,8 @@ public class PlayerFire : MonoBehaviour
                     {
                         magazine[i].SetActive(true);
                         magazine[i].transform.position = transform.position;
-                        magazine[i].transform.rotation = transform.rotation;                            
+                        magazine[i].transform.rotation = transform.rotation;
+                        SoundManager.sm.PlayGunSound();
                         break;
                     }
                 }

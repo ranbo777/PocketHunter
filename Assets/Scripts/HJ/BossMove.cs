@@ -15,12 +15,8 @@ public class BossMove : MonoBehaviour
 
     void Update()
     {
-
+        //  타겟을 바라본다.
         targetPos = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z);
-
         transform.LookAt(targetPos);
-        
-        
-
     }
 }
