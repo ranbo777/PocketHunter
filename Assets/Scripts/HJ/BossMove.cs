@@ -5,12 +5,12 @@ using UnityEngine;
 public class BossMove : MonoBehaviour
 {
 
-    public GameObject target;
+    GameObject target;
     Vector3 targetPos;
 
     private void Start()
     {
-
+        target = GameObject.Find("Player");
     }
 
     void Update()

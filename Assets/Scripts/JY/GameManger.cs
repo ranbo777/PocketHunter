@@ -42,9 +42,14 @@ public class GameManger : MonoBehaviour
     public RectTransform BossHealthGroup;
     public RectTransform BossHealthBar;
 
+    public Image crosshair;
+
     //  보스 정보를 가지고 있는 변수.
     BossFSM bF;
     float temp;
+
+    //  플레이어 공격 타입. true=원거리,  false=근거리
+    public static bool playerWeaponType = true;
 
 
     // Start is called before the first frame update
@@ -52,14 +57,13 @@ public class GameManger : MonoBehaviour
     {
         bF = GameObject.Find("Boss").GetComponent<BossFSM>();
         //  보스 체력에 비례한 보스체력바 비율
-        temp = BossHealthBar.rect.width / bF.bossHp;
+        temp = BossHealthBar.rect.width / bF.maxBossHP;
         // 메인 메뉴의 현재 시간 초
         //int hour = (int)(playTime / 3600);
         //int min = (int)((playTime - hour * 3600) / 60);
         //int second = (int)(playTime % 60);
 
         //playTimeTxt.text = string.Format("{0:n0}", hour) + ":" + string.Format("{0:n0}", min) + ":" + string.Format("{0:n0}", second);
-
     }
 
     public void GameStart()
@@ -83,18 +87,22 @@ public class GameManger : MonoBehaviour
     void Update()
     {
         //  현재 보스 체력을 보스 체력 UI에 설정.
-        BossHealthBar.sizeDelta = new Vector2(temp * bF.bossHp , 20);
+        BossHealthBar.sizeDelta = new Vector2(temp * bF.HP , 20);
 
         if (isBattle == true)
         {
 
            // playTime2 == playTime; 
             playTime += Time.deltaTime;
-
         }
-       
-
-
+        if (Input.GetButton("Zoom"))
+        {
+            crosshair.gameObject.SetActive(true);
+        }
+        else
+        {
+            crosshair.gameObject.SetActive(false);
+        }
     }
 
 

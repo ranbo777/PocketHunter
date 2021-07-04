@@ -13,6 +13,11 @@ public class PlayerFire : MonoBehaviour
 
     private void Start()
     {
+        if (GameManger.playerWeaponType == false)
+        {
+            gameObject.GetComponent<PlayerFire>().enabled = false;
+        }
+
         for(int i=0; i<magazineValue; i++)
         {
             magazine.Add(Instantiate(bullet));
@@ -22,6 +27,9 @@ public class PlayerFire : MonoBehaviour
     }
     void Update()
     {
+
+        //  왼쪽 마우스 버튼을 누르면 총알 발사 
+        //  탄창에 탄약이 존재 할 경우 발사.
         if (Input.GetButtonDown("Fire1"))
         {
             if(magazine.Count > 0)
@@ -32,11 +40,11 @@ public class PlayerFire : MonoBehaviour
                     {
                         magazine[i].SetActive(true);
                         magazine[i].transform.position = transform.position;
+                        magazine[i].transform.rotation = transform.rotation;                            
                         break;
                     }
                 }
             }
-        }
-                
+        }                        
     }
 }

@@ -9,11 +9,12 @@ public class CameraMove : MonoBehaviour
     float xMove;
     float yMove;
     
-    //Ray hit;
+    Ray hit;
 
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Confined;
         target = GameObject.Find("Player").transform;        
     }
 
@@ -36,15 +37,18 @@ public class CameraMove : MonoBehaviour
         if (!Input.GetButton("Zoom"))
         {
             yMove = 0;
+            target.transform.rotation = new Quaternion(0, target.transform.rotation.y, 0,
+                target.transform.rotation.w);
             transform.position = target.transform.position - transform.rotation * new Vector3(0, -distance / 3, distance);
         }
         else
         {
-            //transform.rotation = target.transform.rotation;                      
+            target.transform.rotation = transform.rotation;                
             transform.position = target.transform.position + transform.rotation * new Vector3(0, 0.5f, 0);            
         }
 
         Debug.DrawRay(transform.position, transform.forward, Color.blue);
+        
     }
 
 }
