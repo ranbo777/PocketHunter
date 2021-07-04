@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-    Transform target;
+    GameObject target;
     public float distance = 1.0f;
     float xMove;
     float yMove;
-    
+
     Ray hit;
 
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Confined;
-        target = GameObject.Find("Player").transform;        
+        target = GameObject.Find("Player");        
     }
 
     void Update()
@@ -23,15 +23,15 @@ public class CameraMove : MonoBehaviour
         xMove += Input.GetAxisRaw("Mouse X");
         transform.rotation = Quaternion.Euler(0, xMove, 0);
 
+        
         if (Input.GetButton("Zoom"))
         {
             yMove += Input.GetAxisRaw("Mouse Y");
             transform.rotation = Quaternion.Euler(-yMove, xMove, 0);
         }
-        //print(xMove + " " + yMove);
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         #region 원거리 줌 기능
         if (!Input.GetButton("Zoom"))
@@ -43,12 +43,10 @@ public class CameraMove : MonoBehaviour
         }
         else
         {
-            target.transform.rotation = transform.rotation;                
-            transform.position = target.transform.position + transform.rotation * new Vector3(0, 0.5f, 0);            
+            target.transform.rotation = transform.rotation;
+            transform.position = target.transform.position + transform.rotation * new Vector3(0, 0.5f, 0);
         }
         #endregion
         Debug.DrawRay(transform.position, transform.forward, Color.blue);
-        
     }
-
 }

@@ -7,8 +7,9 @@ public class BulletMove : MonoBehaviour
     public float bulletSpeed = 0.1f;
     GameObject pa;
     public BossFSM bF;
-    public float existTime = 5.0f;
-    
+    public float existTime = 3.0f;
+
+    //bool check = false;
     
 
     private void Start()
@@ -25,9 +26,10 @@ public class BulletMove : MonoBehaviour
             StartCoroutine(DeleteBullet(existTime));
         }
 
-        //  ÃÑ¾Ë ÀÌµ¿
-        transform.position += transform.TransformDirection(Vector3.forward * bulletSpeed * Time.deltaTime);
-                         
+        //  ÃÑ¾Ë ÀÌµ¿                
+        transform.position += transform.TransformDirection(Vector3.forward * bulletSpeed * Time.deltaTime);           
+        
+        
     }
 
     void OnTriggerEnter(Collider col)

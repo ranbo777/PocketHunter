@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerFire : MonoBehaviour
 {
     public GameObject bullet;
-    public List<GameObject> magazine = new List<GameObject>();
+    //public List<GameObject> magazine = new List<GameObject>();
+    public GameObject go;
     public int magazineValue = 10;
     public GameObject pool;
     public float attackValue = 2.0f;
@@ -18,13 +19,13 @@ public class PlayerFire : MonoBehaviour
         {
             gameObject.GetComponent<PlayerFire>().enabled = false;
         }
-        //  ÅºÈ¯ ÇÒ´ç.
-        for(int i=0; i<magazineValue; i++)
-        {
-            magazine.Add(Instantiate(bullet));
-            magazine[i].SetActive(false);
-            magazine[i].transform.SetParent(pool.transform);
-        }
+        ////  ÅºÈ¯ ÇÒ´ç.
+        //for(int i=0; i<magazineValue; i++)
+        //{
+        //    magazine.Add(Instantiate(bullet));
+        //    magazine[i].SetActive(false);
+        //    magazine[i].transform.SetParent(pool.transform);
+        //}
     }
     void Update()
     {
@@ -33,20 +34,39 @@ public class PlayerFire : MonoBehaviour
         //  ÅºÃ¢¿¡ Åº¾àÀÌ Á¸Àç ÇÒ °æ¿ì ¹ß»ç.
         if (Input.GetButtonDown("Fire1"))
         {
-            if(magazine.Count > 0)
+            go = Instantiate(bullet);
+            go.transform.position = transform.position;
+            SoundManager.sm.PlayGunSound();
+            if (Input.GetButton("Zoom"))
             {
-                for (int i = 0; i<magazineValue; i++)
-                {
-                    if (magazine[i].activeInHierarchy == false)
-                    {
-                        magazine[i].SetActive(true);
-                        magazine[i].transform.position = transform.position;
-                        magazine[i].transform.rotation = transform.rotation;
-                        SoundManager.sm.PlayGunSound();
-                        break;
-                    }
-                }
+                go.transform.rotation = Camera.main.transform.rotation;
             }
-        }                        
+            else if (!Input.GetButton("Zoom"))
+            {
+                go.transform.rotation = transform.rotation;
+            }
+        }
+
+
+
+
+        //if (Input.GetButtonDown("Fire1"))
+        //{
+        //    if(magazine.Count > 0)
+        //    {
+        //        for (int i = 0; i<magazineValue; i++)
+        //        {
+        //            if (magazine[i].activeInHierarchy == false)
+        //            {
+        //                magazine[i].SetActive(true);
+        //                magazine[i].transform.position = transform.position;
+        //                magazine[i].transform.rotation = transform.rotation;
+        //                SoundManager.sm.PlayGunSound();
+        //                break;
+        //            }
+        //        }
+        //    }
+        //}
+        
     }
 }

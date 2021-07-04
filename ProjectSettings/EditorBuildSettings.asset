@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Level(Scenes)/JYScene.unity
+    guid: f5e64075195dd894ab78f148bfcc31d7
   m_configObjects: {}

@@ -787,7 +787,6 @@ GameObject:
   - component: {fileID: 8423039338927317962}
   - component: {fileID: 8423039338927317960}
   - component: {fileID: 8423039338927317961}
-  - component: {fileID: 8423039338927317973}
   - component: {fileID: 8423039338927317966}
   m_Layer: 3
   m_Name: Boss
@@ -861,19 +860,6 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0.05}
---- !u!114 &8423039338927317973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8423039338927317972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d788fdbea97f5dd49916cfd80ecb3182, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 6383855314808775708, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
 --- !u!114 &8423039338927317966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -887,6 +873,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxBossHP: 100
+  distance: 3
+  bossState: 0
 --- !u!1 &8423039338928840511
 GameObject:
   m_ObjectHideFlags: 0

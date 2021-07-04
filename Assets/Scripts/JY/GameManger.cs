@@ -29,6 +29,7 @@ public class GameManger : MonoBehaviour
     public Text playTime2Txt;
 
     public Text playerHealthTxt;
+    public RectTransform playerHealthBar;
     public Text playerStaminaTxt;
     public Text playerAmmoTxt;
     public Text playerCoinTxt;
@@ -44,9 +45,13 @@ public class GameManger : MonoBehaviour
 
     public Image crosshair;
 
+    public Image stunEffect;
+
     //  보스 정보를 가지고 있는 변수.
     BossFSM bF;
+    PlayerState pS;
     float temp;
+    float temp2;
 
     //  플레이어 공격 타입. true=원거리,  false=근거리
     public static bool playerWeaponType = true;
@@ -56,8 +61,11 @@ public class GameManger : MonoBehaviour
     void Awake()
     {
         bF = GameObject.Find("Boss").GetComponent<BossFSM>();
+        pS = GameObject.Find("Player").GetComponent<PlayerState>();
+
         //  보스 체력에 비례한 보스체력바 비율
         temp = BossHealthBar.rect.width / bF.maxBossHP;
+        temp2 = playerHealthBar.rect.width / pS.playerMaxHP;
         // 메인 메뉴의 현재 시간 초
         //int hour = (int)(playTime / 3600);
         //int min = (int)((playTime - hour * 3600) / 60);
@@ -88,6 +96,10 @@ public class GameManger : MonoBehaviour
     {
         //  현재 보스 체력을 보스 체력 UI에 설정.
         BossHealthBar.sizeDelta = new Vector2(temp * bF.HP , 20);
+
+        //  현재 플레이어 체력을 플레이어 체력 UI에 설정.
+        playerHealthBar.sizeDelta = new Vector2(temp2 * pS.GetPlayerHP(), 25);
+        playerHealthTxt.text = pS.GetPlayerHP()+" / 100";
 
         if (isBattle == true)
         {

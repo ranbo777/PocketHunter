@@ -17,6 +17,8 @@ public class PlayerMove : MonoBehaviour
     float jumpPower = 0.2f;
     bool check = false;
 
+    Quaternion rotate;
+
     void Start()
     {
         temp = moveSpeed;
@@ -57,8 +59,10 @@ public class PlayerMove : MonoBehaviour
         //  플레이어 회전
         if (move != Vector3.zero)
         {
-            Quaternion rotate = Quaternion.LookRotation(new Vector3(move.x, 0, move.z));
-
+            if (!Input.GetButton("Zoom"))
+            {
+                rotate = Quaternion.LookRotation(new Vector3(move.x, 0, move.z));
+            }            
             transform.rotation = Quaternion.Slerp(transform.rotation, rotate, 15.0f * Time.deltaTime);
         }
 
