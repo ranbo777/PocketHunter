@@ -4,35 +4,49 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-    Transform target;
+    GameObject target;
+    public float distance = 1.0f;
+    float xMove;
+    float yMove;
 
-    public Vector3 offset = new Vector3(0, 1.1f, -1.1f);
     Ray hit;
 
 
     void Start()
     {
-        target = GameObject.Find("Player").transform;
-        
+        Cursor.lockState = CursorLockMode.Confined;
+        target = GameObject.Find("Player");        
     }
 
     void Update()
-    {        
-            transform.RotateAround(target.position, Vector3.up, Input.GetAxisRaw("Mouse X"));
-            transform.RotateAround(target.position, Vector3.right, -Input.GetAxisRaw("Mouse Y"));
+    {
+        xMove += Input.GetAxisRaw("Mouse X");
+        transform.rotation = Quaternion.Euler(0, xMove, 0);
 
-        offset = transform.position - target.transform.position;
-        offset.Normalize();
-
-        Debug.DrawRay(transform.position, transform.forward, Color.blue);
-
-
+        
+        if (Input.GetButton("Zoom"))
+        {
+            yMove += Input.GetAxisRaw("Mouse Y");
+            transform.rotation = Quaternion.Euler(-yMove, xMove, 0);
+        }
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
-
-        transform.position = target.transform.position + offset * 2.0f;
-        transform.LookAt(target);
+        #region 원거리 줌 기능
+        if (!Input.GetButton("Zoom"))
+        {
+            yMove = 0;
+            target.transform.rotation = new Quaternion(0, target.transform.rotation.y, 0,
+                target.transform.rotation.w);
+            transform.position = target.transform.position - transform.rotation * new Vector3(0, -distance / 3, distance);
+        }
+        else
+        {
+            target.transform.rotation = transform.rotation;
+            transform.position = target.transform.position + transform.rotation * new Vector3(0, 0.5f, 0);
+        }
+        #endregion
+        Debug.DrawRay(transform.position, transform.forward, Color.blue);
     }
 }
