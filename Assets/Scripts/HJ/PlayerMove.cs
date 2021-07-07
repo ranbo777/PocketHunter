@@ -15,6 +15,8 @@ public class PlayerMove : MonoBehaviour
     float yVelocity = 0;
     float dodgeCooltime = 1.0f;
     float jumpPower = 0.2f;
+    float xInput;
+    float zInput;
     bool check = false;
 
     Quaternion rotate;
@@ -32,9 +34,17 @@ public class PlayerMove : MonoBehaviour
         time += Time.deltaTime;
 
         #region 플레이어 이동
-        Vector3 move = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        move = Camera.main.transform.TransformDirection(move);
+        xInput = Input.GetAxisRaw("Horizontal");
+        zInput = Input.GetAxisRaw("Vertical");
+        if(PlayerState.stunCheck == true)
+        {
+            xInput = 0;
+            zInput = 0;
+        }
+
+        Vector3 move = new Vector3(xInput, 0, zInput);
         move.Normalize();
+        move = Camera.main.transform.TransformDirection(move);
         move.y = 0;
 
         //  플레이어 이동

@@ -5,17 +5,19 @@ using UnityEngine;
 public class BulletMove : MonoBehaviour
 {
     public float bulletSpeed = 0.1f;
-    GameObject pa;
+    PlayerFire pf;
     public BossFSM bF;
     public float existTime = 3.0f;
+    Rigidbody rb;
 
     //bool check = false;
     
 
     private void Start()
     {
+        rb = gameObject.GetComponent<Rigidbody>();
         bF = GameObject.Find("Boss").GetComponent<BossFSM>();
-        pa = GameObject.Find("Player").transform.Find("Sup").gameObject;
+        pf = GameObject.Find("Player").GetComponent<PlayerFire>();
         
     }
 
@@ -24,12 +26,16 @@ public class BulletMove : MonoBehaviour
         if (gameObject.activeInHierarchy == true)
         {
             StartCoroutine(DeleteBullet(existTime));
-        }
+        }        
+    }
 
+    private void FixedUpdate()
+    {
         //  총알 이동                
-        transform.position += transform.TransformDirection(Vector3.forward * bulletSpeed * Time.deltaTime);           
-        
-        
+        //  transform.position += transform.TransformDirection(Vector3.forward * bulletSpeed * Time.deltaTime);
+        rb.velocity += transform.TransformDirection(Vector3.forward * bulletSpeed * Time.deltaTime);
+
+
     }
 
     void OnTriggerEnter(Collider col)
@@ -37,8 +43,8 @@ public class BulletMove : MonoBehaviour
         //  탄환에 맞은 오브젝트가 보스일 경우 보스에게 데미지를 입힌다.
         if (col.tag.Equals("Boss"))
         {
-            bF.TakeDamage(pa.GetComponent<PlayerFire>().attackValue);
-            gameObject.SetActive(false);
+            bF.TakeDamage(pf.attackValue);
+            Destroy(gameObject);
             
         }
     }
@@ -47,7 +53,8 @@ public class BulletMove : MonoBehaviour
     IEnumerator DeleteBullet(float t)
     {
         yield return new WaitForSeconds(t);
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        Destroy(gameObject);
     }
    
 }

@@ -4,34 +4,28 @@ using UnityEngine;
 
 public class PlayerState : MonoBehaviour
 {
-    int stateType;
     int playerState = 0;
 
+    #region 플레이어 체력 변수
     public float playerMaxHP = 100.0f;
     float playerHP;
     float playerStunGauge = 0;
+    #endregion
 
-    PlayerFire pf;
-    PlayerMove pm;
-    CameraMove cm;
+    #region 플레이어 상태 체크 변수    
+    public static bool stunCheck = false;
+    public static bool poisonCheck = false;
+    public static bool sleepCheck = false;
+    #endregion
+
     GameManger gm;
 
-    public enum PlayerDebuff
-    {
-        Stun = 1,
-        Sleep = 1<<1,
-        Poison = 1<<2,
-
-    }
-
+    //  0b_001 스턴   0b_010 독    0b_100 수면
     void Start()
     {
         playerHP = playerMaxHP;
 
-        cm = Camera.main.GetComponent<CameraMove>();
         gm = GameObject.Find("GameManager").GetComponent<GameManger>();
-        pm = gameObject.GetComponent<PlayerMove>();
-        pf = gameObject.GetComponentInChildren<PlayerFire>();
         playerState = 0b_111;
     }
 
@@ -49,7 +43,7 @@ public class PlayerState : MonoBehaviour
                 playerStunGauge = 0;               
             }
         }
-        if((playerState & 0b_001) == 0b_000)
+        if(stunCheck == true)
         {
             playerStunGauge = 0;
         }
@@ -59,21 +53,21 @@ public class PlayerState : MonoBehaviour
     IEnumerator ReturnState(int value)
     {
         yield return new WaitForSeconds(3.0f);
-        pm.enabled = true;
-        pf.enabled = true;
-        cm.enabled = true;
-        gm.stunEffect.gameObject.SetActive(false);
+        gm.stunEffect.gameObject.SetActive(false);        
         playerState += value;
+        if(value == 0b_001)
+        {
+            stunCheck = false;
+        }
         print("상태 되돌아옴");
     }
     
     void PlayerStun(int value)
     {
         print("스턴걸림");
-        pm.enabled = false;
-        pf.enabled = false;
-        cm.enabled = false;
+        stunCheck = true;
         gm.stunEffect.gameObject.SetActive(true);
+        
         StartCoroutine(ReturnState(value));
     }
 

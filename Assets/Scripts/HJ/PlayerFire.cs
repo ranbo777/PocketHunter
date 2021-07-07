@@ -6,10 +6,10 @@ public class PlayerFire : MonoBehaviour
 {
     public GameObject bullet;
     //public List<GameObject> magazine = new List<GameObject>();
-    public GameObject go;
     public int magazineValue = 10;
     public GameObject pool;
     public float attackValue = 2.0f;
+    public GameObject sup;
 
 
     private void Start()
@@ -32,19 +32,12 @@ public class PlayerFire : MonoBehaviour
 
         //  왼쪽 마우스 버튼을 누르면 총알 발사 
         //  탄창에 탄약이 존재 할 경우 발사.
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && PlayerState.stunCheck == false)
         {
-            go = Instantiate(bullet);
-            go.transform.position = transform.position;
+            GameObject go = Instantiate(bullet);
+            go.transform.position = sup.transform.position;
             SoundManager.sm.PlayGunSound();
-            if (Input.GetButton("Zoom"))
-            {
-                go.transform.rotation = Camera.main.transform.rotation;
-            }
-            else if (!Input.GetButton("Zoom"))
-            {
-                go.transform.rotation = transform.rotation;
-            }
+            go.transform.rotation = sup.transform.rotation;
         }
 
 

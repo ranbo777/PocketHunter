@@ -29,6 +29,10 @@ public class BossFSM : MonoBehaviour
     GameObject target;
     PlayerState targetState;
 
+    float gravity = -0.8f;
+    float yVelocity;
+    CharacterController cc;
+
     float time;
 
     //  º¸½º FSM
@@ -46,11 +50,17 @@ public class BossFSM : MonoBehaviour
 
         time = bossAttackCooltime;
         HP = maxBossHP;
-        bossState = State.Idle;        
+        bossState = State.Idle;
+
+        cc = gameObject.GetComponent<CharacterController>();
     }
 
     void Update()
     {
+        yVelocity += gravity * Time.deltaTime;
+
+        cc.Move(new Vector3(0, yVelocity, 0));
+
         distance = (target.transform.position - transform.position).magnitude;
 
         time += Time.deltaTime;
