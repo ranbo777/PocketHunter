@@ -6,7 +6,7 @@ public class BossFSM : MonoBehaviour
 {
     #region 보스 이동 변수
     public Vector3 move;
-    public float bossSpeed = 1.0f;
+    public float bossSpeed = 4.0f;
     #endregion
 
     #region 보스 체력 변수
@@ -38,6 +38,11 @@ public class BossFSM : MonoBehaviour
     float yVelocity;
     #endregion
 
+    #region 보스 경직 변수
+    float bossGroggyTime = 0;
+    float bossGroggyValue = 0;
+    #endregion
+
     #region 보스 패턴1 변수
     float p1X;
     float p1Y;
@@ -49,15 +54,9 @@ public class BossFSM : MonoBehaviour
     float p1Radius = 3.0f;
     public GameObject p1Bullet;
     #endregion
-<<<<<<< HEAD
 
     CharacterController cc;
 
-=======
-
-    CharacterController cc;
-
->>>>>>> 1cd38531a7ca9bdf2b716b8f21ffb0d8c33e26bb
     float time;
 
     //  보스 FSM
@@ -66,12 +65,9 @@ public class BossFSM : MonoBehaviour
         Idle,
         Move,
         Attack,
-<<<<<<< HEAD
-        Pattern_4,
+        Groggy,
+        Pattern_4,        
         Dead
-=======
-        Pattern_4
->>>>>>> 1cd38531a7ca9bdf2b716b8f21ffb0d8c33e26bb
     }
     public State bossState;
     void Start()
@@ -112,6 +108,11 @@ public class BossFSM : MonoBehaviour
         //    print("보스 상태 전환 Idle");
         //    bossState = State.Idle;
         //}
+
+        if(bossGroggyValue >= 10.0f)
+        {
+            bossState = State.Groggy;
+        }
         
         switch(bossState)
         {
@@ -133,15 +134,21 @@ public class BossFSM : MonoBehaviour
                     time = 0;
                 }                
                 break;
+            case State.Groggy:
+                bossGroggyTime += Time.deltaTime;
+                if(bossGroggyTime >= 3.0f)
+                {
+                    bossGroggyValue = 0;
+                    bossGroggyTime = 0;
+                    bossState = State.Move;
+                }
+                break;
             case State.Pattern_4:
                 LookTarget();
                 break;
-<<<<<<< HEAD
 
             case State.Dead:
                 break;
-=======
->>>>>>> 1cd38531a7ca9bdf2b716b8f21ffb0d8c33e26bb
         }        
         //  보스 hp가 0 밑으로 내려가지 않게 설정.
         HP = Mathf.Max(0, HP);
@@ -154,9 +161,10 @@ public class BossFSM : MonoBehaviour
         targetState.SetStunGauge(stunValue);
     }
 
-    public void TakeDamage(float p)
+    public void TakeDamage(float playerAttackValue, float playerGroggyValue)
     {
-        HP -= p;
+        HP -= playerAttackValue;
+        bossGroggyValue += playerGroggyValue;
     }
 
     void LookTarget()
@@ -190,12 +198,4 @@ public class BossFSM : MonoBehaviour
         }
     }
 
-<<<<<<< HEAD
-    private void OnDestroy()
-    {
-        
-    }
-
-=======
->>>>>>> 1cd38531a7ca9bdf2b716b8f21ffb0d8c33e26bb
 }

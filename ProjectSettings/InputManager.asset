@@ -357,7 +357,6 @@ InputManager:
     type: 0
     axis: 0
     joyNum: 0
-<<<<<<< HEAD
   - serializedVersion: 3
     m_Name: Interaction
     descriptiveName: 
@@ -374,5 +373,3 @@ InputManager:
     type: 0
     axis: 0
     joyNum: 0
-=======
->>>>>>> 1cd38531a7ca9bdf2b716b8f21ffb0d8c33e26bb

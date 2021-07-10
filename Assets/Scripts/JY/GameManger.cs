@@ -58,8 +58,6 @@ public class GameManger : MonoBehaviour
     public Image crosshair;
     public Image stunEffect;
 
-    public Image stunEffect;
-
     //  보스 정보를 가지고 있는 변수.
     BossFSM bF;
     PlayerState pS;

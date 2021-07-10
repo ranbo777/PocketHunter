@@ -858,7 +858,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0, z: 0}
-  bossSpeed: 1
+  bossSpeed: 4
   maxBossHP: 500
   bossAttackValue: 20
   bossDealStunValue: 2.5
