@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Item
   - Trace
+  - BossAttackCol
   layers:
   - Default
   - TransparentFX

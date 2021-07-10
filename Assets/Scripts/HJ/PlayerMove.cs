@@ -127,7 +127,7 @@ public class PlayerMove : MonoBehaviour
 
 
         //  플레이어 회피        
-        if (time >= dodgeCooltime && check == false)
+        if (time >= dodgeCooltime && check == false && move!=Vector3.zero)
         {
             if (Input.GetButtonDown("Dodge"))
             {
@@ -200,7 +200,6 @@ public class PlayerMove : MonoBehaviour
         if (other.tag == "Trace")
         {
             nearObject = other.gameObject;
-
         }
     }
 

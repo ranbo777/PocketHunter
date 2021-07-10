@@ -56,6 +56,7 @@ public class BossFSM : MonoBehaviour
     #endregion
 
     CharacterController cc;
+    Animator am;
 
     float time;
 
@@ -72,6 +73,7 @@ public class BossFSM : MonoBehaviour
     public State bossState;
     void Start()
     {
+        am = gameObject.GetComponent<Animator>();
         target = GameObject.Find("Player");
         targetState = target.GetComponent<PlayerState>();
 
@@ -97,18 +99,18 @@ public class BossFSM : MonoBehaviour
         {
             StartCoroutine(Pattern_1(10));
         }
-        //if(distance <= attackDistance && bossState != State.Attack)
-        //{
-        //    print("보스 상태 전환 Attack");
-        //    bossState = State.Attack;
-        //}
-        //else if(distance > attackDistance && bossState != State.Idle)
-        //{
-        //    print("보스 상태 전환 Idle");
-        //    bossState = State.Idle;
-        //}
+        if (distance <= bossAttackDistance && bossState != State.Attack)
+        {
+            print("보스 상태 전환 Attack");
+            bossState = State.Attack;
+        }
+        else if (distance > bossAttackDistance && bossState != State.Idle)
+        {
+            print("보스 상태 전환 Idle");
+            bossState = State.Idle;
+        }
 
-        if(bossGroggyValue >= 10.0f)
+        if (bossGroggyValue >= 10.0f)
         {
             bossState = State.Groggy;
         }
@@ -123,9 +125,11 @@ public class BossFSM : MonoBehaviour
                 move = new Vector3(target.transform.position.x - transform.position.x, 0, 
                     target.transform.position.z - transform.position.z);
                 move.Normalize();
+                am.SetFloat("Runspeed", move.magnitude);
                 cc.Move(move * bossSpeed * Time.deltaTime);
                 break;
             case State.Attack:
+                am.SetBool("OnAttack1", true);               
                 LookTarget();
                 if(time >= bossAttackCooltime)
                 {
