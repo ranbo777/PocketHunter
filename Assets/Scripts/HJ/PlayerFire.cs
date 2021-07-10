@@ -11,7 +11,6 @@ public class PlayerFire : MonoBehaviour
     public float attackValue = 2.0f;
     public GameObject sup;
 
-
     private void Start()
     {
         //  플레이어의 공격 타입이 근거리일 경우 원거리 공격 관련 스크립트 비활성화. 

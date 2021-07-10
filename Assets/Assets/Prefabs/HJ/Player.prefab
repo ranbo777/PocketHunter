@@ -454,6 +454,7 @@ GameObject:
   - component: {fileID: -2340587333429806397}
   - component: {fileID: 1201882768}
   - component: {fileID: 4082872709735001133}
+  - component: {fileID: 1223138222}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -485,7 +486,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6383855314808775708}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 100
@@ -516,7 +517,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 1.5
   m_Radius: 100
-  m_SlopeLimit: 45
+  m_SlopeLimit: 35
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -534,9 +535,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMaxHP: 100
-  stunCheck: 0
-  poisonCheck: 0
-  sleepCheck: 0
 --- !u!114 &4082872709735001133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,6 +552,22 @@ MonoBehaviour:
   pool: {fileID: 0}
   attackValue: 2
   sup: {fileID: 5379628270244559890}
+--- !u!54 &1223138222
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6383855314808775708}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7649043141385089303
 GameObject:
   m_ObjectHideFlags: 0

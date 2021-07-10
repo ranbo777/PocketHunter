@@ -44,8 +44,11 @@ public class BulletMove : MonoBehaviour
         if (col.tag.Equals("Boss"))
         {
             bF.TakeDamage(pf.attackValue);
+            Destroy(gameObject);            
+        }
+        if (col.tag.Equals("Ground"))
+        {
             Destroy(gameObject);
-            
         }
     }
     
