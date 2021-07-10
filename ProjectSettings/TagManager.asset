@@ -7,8 +7,11 @@ TagManager:
   - Boss
   - Bullet
   - Ground
+<<<<<<< HEAD
   - Item
   - Trace
+=======
+>>>>>>> 1cd38531a7ca9bdf2b716b8f21ffb0d8c33e26bb
   layers:
   - Default
   - TransparentFX

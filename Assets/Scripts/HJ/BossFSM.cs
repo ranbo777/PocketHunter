@@ -49,9 +49,15 @@ public class BossFSM : MonoBehaviour
     float p1Radius = 3.0f;
     public GameObject p1Bullet;
     #endregion
+<<<<<<< HEAD
 
     CharacterController cc;
 
+=======
+
+    CharacterController cc;
+
+>>>>>>> 1cd38531a7ca9bdf2b716b8f21ffb0d8c33e26bb
     float time;
 
     //  보스 FSM
@@ -60,8 +66,12 @@ public class BossFSM : MonoBehaviour
         Idle,
         Move,
         Attack,
+<<<<<<< HEAD
         Pattern_4,
         Dead
+=======
+        Pattern_4
+>>>>>>> 1cd38531a7ca9bdf2b716b8f21ffb0d8c33e26bb
     }
     public State bossState;
     void Start()
@@ -126,9 +136,12 @@ public class BossFSM : MonoBehaviour
             case State.Pattern_4:
                 LookTarget();
                 break;
+<<<<<<< HEAD
 
             case State.Dead:
                 break;
+=======
+>>>>>>> 1cd38531a7ca9bdf2b716b8f21ffb0d8c33e26bb
         }        
         //  보스 hp가 0 밑으로 내려가지 않게 설정.
         HP = Mathf.Max(0, HP);
@@ -177,9 +190,12 @@ public class BossFSM : MonoBehaviour
         }
     }
 
+<<<<<<< HEAD
     private void OnDestroy()
     {
         
     }
 
+=======
+>>>>>>> 1cd38531a7ca9bdf2b716b8f21ffb0d8c33e26bb
 }

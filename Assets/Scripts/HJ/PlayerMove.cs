@@ -10,9 +10,13 @@ public class PlayerMove : MonoBehaviour
     public float moveSpeed = 1.0f;
     BossFSM bF;
     CharacterController cc;
+<<<<<<< HEAD
     
 
     GameManger gm;
+=======
+
+>>>>>>> 1cd38531a7ca9bdf2b716b8f21ffb0d8c33e26bb
     float temp;
     float time = 0;
 
@@ -31,6 +35,7 @@ public class PlayerMove : MonoBehaviour
     Vector3 bossMove = Vector3.zero;
 
     //  회피 쿨타임 및 회피 중 다른 행동을 제한하는 체크 변수
+<<<<<<< HEAD
     public bool check = false;
 
     // JY 아이템 상호작용 관련 변수
@@ -44,6 +49,13 @@ public class PlayerMove : MonoBehaviour
     public bool gamecamOn = true;
     //
   
+
+
+    Quaternion rotate;
+=======
+    bool check = false;
+>>>>>>> 1cd38531a7ca9bdf2b716b8f21ffb0d8c33e26bb
+
 
 
     Quaternion rotate;
@@ -73,6 +85,7 @@ public class PlayerMove : MonoBehaviour
 
         move = new Vector3(xInput, 0, zInput);
         move.Normalize();
+<<<<<<< HEAD
 
         if (gamecamOn != false) 
             
@@ -83,6 +96,9 @@ public class PlayerMove : MonoBehaviour
         {
             //esc 를 눌렀을때, 무브카메라 비활성화
         }
+=======
+        move = Camera.main.transform.TransformDirection(move);
+>>>>>>> 1cd38531a7ca9bdf2b716b8f21ffb0d8c33e26bb
         move.y = 0;
 
         //  플레이어 이동
@@ -108,6 +124,7 @@ public class PlayerMove : MonoBehaviour
 
         //  플레이어 회전
         if (move != Vector3.zero && check == false)
+<<<<<<< HEAD
         {
             if (!Input.GetButton("Zoom"))
             {
@@ -125,6 +142,22 @@ public class PlayerMove : MonoBehaviour
         
 
 
+=======
+        {
+            if (!Input.GetButton("Zoom"))
+            {
+                rotate = Quaternion.LookRotation(new Vector3(move.x, 0, move.z));
+            }            
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotate, 15.0f * Time.deltaTime);
+        }
+
+        //  플레이어 점프
+        if (Input.GetButtonDown("Jump") && check == false)
+        {
+            yVelocity = jumpPower;
+        }
+
+>>>>>>> 1cd38531a7ca9bdf2b716b8f21ffb0d8c33e26bb
         //  플레이어 회피        
         if (time >= dodgeCooltime && check == false)
         {
@@ -146,6 +179,7 @@ public class PlayerMove : MonoBehaviour
         {
             moveSpeed = temp / 2;
         }
+<<<<<<< HEAD
 
         // 아이템 상호작용(F)
         if (Input.GetButtonDown("Interaction"))
@@ -175,6 +209,8 @@ public class PlayerMove : MonoBehaviour
 
             }
         }
+=======
+>>>>>>> 1cd38531a7ca9bdf2b716b8f21ffb0d8c33e26bb
     }
 
     //  체크 Off 함수
@@ -189,6 +225,7 @@ public class PlayerMove : MonoBehaviour
         {
             bossMove = new Vector3(bF.move.x, 0, bF.move.z);
         }
+<<<<<<< HEAD
 
         // 아이템 트리거
         if (other.tag == "Item")
@@ -210,5 +247,7 @@ public class PlayerMove : MonoBehaviour
   void Gamecamoff() 
     {
         gamecamOn = false;
+=======
+>>>>>>> 1cd38531a7ca9bdf2b716b8f21ffb0d8c33e26bb
     }
 }
