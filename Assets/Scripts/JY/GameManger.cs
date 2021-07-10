@@ -29,6 +29,7 @@ public class GameManger : MonoBehaviour
     public Text playTime2Txt;
 
     public Text playerHealthTxt;
+    public RectTransform playerHealthBar;
     public Text playerStaminaTxt;
     public Text playerAmmoTxt;
     public Text playerCoinTxt;
@@ -39,15 +40,31 @@ public class GameManger : MonoBehaviour
     public Image weapon4Img;
     public Image weaponRImg;
 
+    // 보스 흔적 UI
+    public GameObject Trace;
+    public GameObject Trace1;
+    public GameObject Trace2;
+    public GameObject Trace3;
+    public GameObject Trace4;
+
+    // Equip 인벤토리
+    public GameObject gun;
+    public GameObject sword;
+    public GameObject DevStone;
+
     public RectTransform BossHealthGroup;
     public RectTransform BossHealthBar;
 
     public Image crosshair;
+    public Image stunEffect;
 
     //  보스 정보를 가지고 있는 변수.
     BossFSM bF;
+    PlayerState pS;
     float temp;
+    float temp2;
 
+    public PlayerMove pm;
     //  플레이어 공격 타입. true=원거리,  false=근거리
     public static bool playerWeaponType = true;
 
@@ -56,8 +73,11 @@ public class GameManger : MonoBehaviour
     void Awake()
     {
         bF = GameObject.Find("Boss").GetComponent<BossFSM>();
+        pS = GameObject.Find("Player").GetComponent<PlayerState>();
+
         //  보스 체력에 비례한 보스체력바 비율
         temp = BossHealthBar.rect.width / bF.maxBossHP;
+        temp2 = playerHealthBar.rect.width / pS.playerMaxHP;
         // 메인 메뉴의 현재 시간 초
         //int hour = (int)(playTime / 3600);
         //int min = (int)((playTime - hour * 3600) / 60);
@@ -68,12 +88,13 @@ public class GameManger : MonoBehaviour
 
     public void GameStart()
     {
-
-
+        
         isBattle = true;
 
         menuCam.SetActive(false);
         gameCam.SetActive(true);
+        pm.gamecamOn = true;
+        pm.check = false;
 
         menuPanel.SetActive(false);
         gamePanel.SetActive(true);
@@ -89,13 +110,17 @@ public class GameManger : MonoBehaviour
         //  현재 보스 체력을 보스 체력 UI에 설정.
         BossHealthBar.sizeDelta = new Vector2(temp * bF.HP , 20);
 
+        //  현재 플레이어 체력을 플레이어 체력 UI에 설정.
+        playerHealthBar.sizeDelta = new Vector2(temp2 * pS.GetPlayerHP(), 25);
+        playerHealthTxt.text = pS.GetPlayerHP()+" / 100";
+
         if (isBattle == true)
         {
 
            // playTime2 == playTime; 
             playTime += Time.deltaTime;
         }
-        if (Input.GetButton("Zoom"))
+        if (Input.GetButton("Zoom") && PlayerState.stunCheck ==false)
         {
             crosshair.gameObject.SetActive(true);
         }
@@ -126,14 +151,64 @@ public class GameManger : MonoBehaviour
 
             menuCam.SetActive(true);
             gameCam.SetActive(false);
+            pm.gamecamOn = false;
+            pm.check = true;
 
             menuPanel.SetActive(true);
             gamePanel.SetActive(false);
 
-            player.gameObject.SetActive(false);
+           // player.gameObject.SetActive(false);
 
 
         }
+        
+
+        if (Input.GetKeyDown(KeyCode.Alpha1)) 
+        { gun.SetActive(true);
+          sword.SetActive(false);
+
+          playerWeaponType = true;
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            gun.SetActive(false);
+            sword.SetActive(true);
+
+            playerWeaponType = false;
+        }
+
+
+
+        // ** 간소화 예정
+        #region (JY) Trace UI 간소화 예정
+        if (pm.hasTrace [0] == true) 
+        {
+            Trace.SetActive(true);
+        }
+        if (pm.hasTrace[1] == true)
+        {
+            Trace1.SetActive(true);
+        }
+        if (pm.hasTrace[2] == true)
+        {
+            Trace2.SetActive(true);
+        }
+        if (pm.hasTrace[3] == true)
+        {
+            Trace3.SetActive(true);
+        }
+        if (pm.hasTrace[4] == true)
+        {
+            Trace4.SetActive(true);
+        }
+
+        if (pm.hasItem[0] == true)
+        {
+            DevStone.SetActive(true);
+        }
+        #endregion
 
         //playerHealthTxt.text = player.health + " / " + player.maxHealth;
         //playerCoinTxt.text = string.Format("{0:n0}", player.coin);
@@ -155,5 +230,7 @@ public class GameManger : MonoBehaviour
         // 보스 몬스터 체력
         // BossHealthBar.localScale = new Vector3(BossHealthBar.curHealth / Boss.maxHealth, 1, 1) ;
     }
+
+
 
 }
