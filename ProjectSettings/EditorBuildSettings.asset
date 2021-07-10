@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Level(Scenes)/JYScene.unity
-    guid: f5e64075195dd894ab78f148bfcc31d7
+    path: Assets/Level(Scenes)/HYScene/BuildScene 1.unity
+    guid: 017b575e5b915564680553a4df00cc24
   m_configObjects: {}

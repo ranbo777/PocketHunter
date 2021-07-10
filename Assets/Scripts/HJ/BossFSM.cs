@@ -77,7 +77,7 @@ public class BossFSM : MonoBehaviour
 
         time = bossAttackCooltime;
         HP = maxBossHP;
-        bossState = State.Move;
+        bossState = State.Idle;
 
         cc = gameObject.GetComponent<CharacterController>();
     }
@@ -95,8 +95,7 @@ public class BossFSM : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.O))
         {
-            Pattern_1();
-            
+            StartCoroutine(Pattern_1(10));
         }
         //if(distance <= attackDistance && bossState != State.Attack)
         //{
@@ -173,15 +172,16 @@ public class BossFSM : MonoBehaviour
         
     }
 
-    void Pattern_1()
+    IEnumerator Pattern_1(int count)
     {
-        p1BossPos = transform.position + transform.up;        
-
-        for (int i = 1; i <= 10; i++)
+        int count_ = count;
+        while (count_ > 0)
         {
+            count_--;
+            p1BossPos = transform.position + transform.up;        
             p1TargetPos = target.transform.position - target.transform.up * 1.5f +
-                transform.TransformDirection(Random.Range(-2.0f + i * 0.2f, 2.0f - i * 0.2f), 0,
-                    Random.Range(-2.5f + i * 0.5f, 7.5f - i * 0.5f));
+                transform.TransformDirection(Random.Range(-2.0f, 2.0f), 0,
+                    Random.Range(-2.5f, 5.0f));
 
             p1X = 5 * p1Radius * Mathf.Cos(Mathf.Deg2Rad * Random.Range(180, 360));
             p1Y = 5 * p1Radius * Mathf.Sin(Mathf.Deg2Rad * Random.Range(180, 360));
@@ -195,7 +195,11 @@ public class BossFSM : MonoBehaviour
 
             GameObject go = Instantiate(p1Bullet);
             go.GetComponent<P1BulletMove>().GetHandle(p1BossPos, p1TargetPos, p1HandlePos1, p1HandlePos2);
+            yield return new WaitForSeconds(0.1f);
         }
+        yield return null;
+
+                            
     }
 
 }

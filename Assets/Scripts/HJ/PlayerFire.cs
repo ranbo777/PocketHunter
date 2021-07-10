@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerFire : MonoBehaviour
 {
     public GameObject bullet;
-    public int magazineValue = 10;
     public float groggyValue = 1.0f;
     public float attackValue = 2.0f;
     public GameObject sup;

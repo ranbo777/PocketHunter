@@ -88,7 +88,8 @@ public class PlayerMove : MonoBehaviour
         //  플레이어 이동
         if (check == false)
         {
-            cc.Move((move+bossMove) * moveSpeed * Time.deltaTime);
+            cc.Move(bossMove * Time.deltaTime);
+            cc.Move(move * moveSpeed * Time.deltaTime);
             //cc.Move(bossMove * Time.deltaTime);
             bossMove = Vector3.zero;
         }

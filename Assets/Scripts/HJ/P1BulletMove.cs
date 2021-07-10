@@ -10,11 +10,6 @@ public class P1BulletMove : MonoBehaviour
     Vector3 handle2;
     Vector3 sPos;
     Vector3 tPos;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
