@@ -22,6 +22,7 @@ public class GameManger : MonoBehaviour
 
     public GameObject menuPanel;
     public GameObject gamePanel;
+   
 
     public Text maxTimeTxt;
     public Text BossStageTxt;
@@ -39,6 +40,7 @@ public class GameManger : MonoBehaviour
     public Image weapon3Img;
     public Image weapon4Img;
     public Image weaponRImg;
+    
 
     // 보스 흔적 UI
     public GameObject Trace;
@@ -65,15 +67,18 @@ public class GameManger : MonoBehaviour
     float temp2;
 
     public PlayerMove pm;
-    //  플레이어 공격 타입. true=원거리,  false=근거리
-    public static bool playerWeaponType = true;
+    //  플레이어 공격 타입. true=원거리근거리,  false=
+    public bool Melee = false;
 
 
     // Start is called before the first frame update
     void Awake()
     {
+        MeleeCheck();
         bF = GameObject.Find("Boss").GetComponent<BossFSM>();
         pS = GameObject.Find("Player").GetComponent<PlayerState>();
+
+       
 
         //  보스 체력에 비례한 보스체력바 비율
         temp = BossHealthBar.rect.width / bF.maxBossHP;
@@ -85,12 +90,14 @@ public class GameManger : MonoBehaviour
 
         //playTimeTxt.text = string.Format("{0:n0}", hour) + ":" + string.Format("{0:n0}", min) + ":" + string.Format("{0:n0}", second);
     }
+    
 
-    public void GameStart()
+public void GameStart()
     {
         
         isBattle = true;
 
+       
         menuCam.SetActive(false);
         gameCam.SetActive(true);
         pm.gamecamOn = true;
@@ -120,7 +127,7 @@ public class GameManger : MonoBehaviour
            // playTime2 == playTime; 
             playTime += Time.deltaTime;
         }
-        if (PlayerState.playerZoomCheck == true && PlayerState.stunCheck ==false)
+        if (Input.GetButton("Zoom") && PlayerState.stunCheck ==false)
         {
             crosshair.gameObject.SetActive(true);
         }
@@ -129,6 +136,11 @@ public class GameManger : MonoBehaviour
             crosshair.gameObject.SetActive(false);
         }
     }
+    void MeleeCheck()
+    {
+        Melee = false;
+    }
+
 
 
     private void LateUpdate()
@@ -148,6 +160,12 @@ public class GameManger : MonoBehaviour
             isBattle = false;
             playTime2Txt.text = playTimeTxt.text;
 
+            Vector3 anchor = new Vector3(0, 14, -10);
+            Quaternion anchor2 = new Quaternion(45, 0, 0, 0);
+
+            menuCam.transform.position = player.transform.position + anchor;
+            menuCam.transform.rotation = anchor2;
+
 
             menuCam.SetActive(true);
             gameCam.SetActive(false);
@@ -163,22 +181,7 @@ public class GameManger : MonoBehaviour
         }
         
 
-        if (Input.GetKeyDown(KeyCode.Alpha1)) 
-        { gun.SetActive(true);
-          sword.SetActive(false);
-
-          playerWeaponType = true;
-        }
-
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            gun.SetActive(false);
-            sword.SetActive(true);
-
-            playerWeaponType = false;
-        }
-
+       
 
 
         // ** 간소화 예정
@@ -210,6 +213,7 @@ public class GameManger : MonoBehaviour
         }
         #endregion
 
+        
         //playerHealthTxt.text = player.health + " / " + player.maxHealth;
         //playerCoinTxt.text = string.Format("{0:n0}", player.coin);
         //if (player.equipWeapon == null)
@@ -231,6 +235,6 @@ public class GameManger : MonoBehaviour
         // BossHealthBar.localScale = new Vector3(BossHealthBar.curHealth / Boss.maxHealth, 1, 1) ;
     }
 
-
+    
 
 }

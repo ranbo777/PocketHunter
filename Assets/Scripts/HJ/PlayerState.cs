@@ -17,7 +17,6 @@ public class PlayerState : MonoBehaviour
     public static bool poisonCheck = false;
     public static bool sleepCheck = false;
     public static bool noHitCheck = false;
-    public static bool playerZoomCheck = false;
     #endregion
 
     GameManger gm;
@@ -35,12 +34,6 @@ public class PlayerState : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Zoom"))
-        {
-            if(playerZoomCheck == false) { playerZoomCheck = true; print("¡‹ On"); }
-            else { playerZoomCheck = false; print("¡‹ Off"); }
-        }
-
         playerHP = Mathf.Max(0, playerHP);
 
         #region «√∑π¿ÃæÓ Ω∫≈œ

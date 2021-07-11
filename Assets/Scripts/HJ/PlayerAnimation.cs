@@ -8,6 +8,7 @@ public class PlayerAnimation : MonoBehaviour
     public Animation am;
     public AnimationClip am1;
     public AnimationClip am2;
+    public Animator anim;
     void Start()
     {
         if(pm == null) { gameObject.transform.parent.GetComponent<PlayerMove>(); }
@@ -19,13 +20,11 @@ public class PlayerAnimation : MonoBehaviour
     {
         if(pm.check == true)
         {
-            am.clip = am1;
-            am.Play();
+            pm.anim.SetTrigger("doDodge");
         }
         if(PlayerState.stunCheck == true)
         {
-            am.clip = am2;
-            am.Play();
+            pm.anim.SetTrigger("doStun");
         }
         else if (PlayerState.stunCheck == false)
         {

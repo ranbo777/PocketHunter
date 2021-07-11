@@ -57,8 +57,12 @@ public class BossFSM : MonoBehaviour
     PlayerState targetState;
     CharacterController cc;
     Animator am;
-
     float time;
+    GameManger gm;
+
+    public GameObject BossItem;
+    public GameObject bossHpUI;
+    
 
     //  보스 FSM
     public enum State
@@ -81,6 +85,7 @@ public class BossFSM : MonoBehaviour
         bossState = State.Idle;
 
         cc = gameObject.GetComponent<CharacterController>();
+        
     }
 
     void Update()
@@ -104,12 +109,6 @@ public class BossFSM : MonoBehaviour
         //    print("보스 상태 전환 Idle");
         //    bossState = State.Idle;
         //}
-
-        if(bossState != State.Move)
-        {
-            move = Vector3.zero;
-            am.SetFloat("Runspeed", move.magnitude);
-        }
 
         if (bossGroggyValue >= 10.0f)
         {
@@ -177,7 +176,7 @@ public class BossFSM : MonoBehaviour
                 }
                 break;
             case State.Dead:
-                    Destroy(gameObject);
+                OnDestroyBoss();
                 break;
         }        
         //  보스 hp가 0 밑으로 내려가지 않게 설정.
@@ -196,6 +195,11 @@ public class BossFSM : MonoBehaviour
     {
         HP -= playerAttackValue;
         bossGroggyValue += playerGroggyValue;
+    }
+
+    public void TakeMeleeDamage(float x)
+    {
+        HP -= x;
     }
 
     void LookTarget()
@@ -245,5 +249,23 @@ public class BossFSM : MonoBehaviour
     {
         bossState = State.Idle;
         print("패턴 딜레이 종료");
+    }
+
+    //보스 죽음
+    void OnDestroyBoss()
+    {
+        Vector3 Revise = new Vector3(0, 1, 0);
+
+
+        GameObject go = Instantiate(BossItem);
+        go.SetActive(true);
+        go.transform.position = transform.position - Revise;
+        Destroy(gameObject);
+        OffBossUI();
+    }
+
+    public void OffBossUI()
+    {
+        bossHpUI.SetActive(false);
     }
 }

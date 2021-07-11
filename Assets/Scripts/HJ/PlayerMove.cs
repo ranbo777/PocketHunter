@@ -27,7 +27,6 @@ public class PlayerMove : MonoBehaviour
     float zInput;
 
     Vector3 move;
-
     Vector3 bossMove = Vector3.zero;
 
     //  회피 쿨타임 및 회피 중 다른 행동을 제한하는 체크 변수
@@ -42,6 +41,8 @@ public class PlayerMove : MonoBehaviour
     public GameObject[] Traces;
     public bool[] hasItem;
     public bool[] hasTrace;
+    public bool isDodge;
+    public Animator anim;
 
     public bool gamecamOn = true;
     //
@@ -100,7 +101,7 @@ public class PlayerMove : MonoBehaviour
         cc.Move(new Vector3(0, yVelocity, 0));
 
         //  대쉬 기능
-        if (Input.GetButton("Dash") && PlayerState.playerZoomCheck == false)
+        if (Input.GetButton("Dash") && !Input.GetButton("Zoom"))
         {
             moveSpeed = temp * 2;
         }
@@ -113,12 +114,11 @@ public class PlayerMove : MonoBehaviour
         //  플레이어 회전
         if (move != Vector3.zero && check == false)
         {
-            if (PlayerState.playerZoomCheck == false)
+            if (!Input.GetButton("Zoom"))
             {
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotate, 25.0f * Time.deltaTime);
-            }                        
-            rotate = Quaternion.LookRotation(new Vector3(move.x, 0, move.z));
-            //transform.rotation = rotate;
+                rotate = Quaternion.LookRotation(new Vector3(move.x, 0, move.z));
+            }            
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotate, 15.0f * Time.deltaTime);
         }
 
         //  플레이어 점프
@@ -132,11 +132,15 @@ public class PlayerMove : MonoBehaviour
         {
             if (Input.GetButtonDown("Dodge"))
             {
+                anim.SetTrigger("doDodge");
                 dodgeMove = move;
                 check = true;
-                transform.rotation = rotate;
-                PlayerState.playerZoomCheck = false;
                 time = 0;
+                isDodge = true;
+
+                
+                Invoke("DodgeOut", 0.4f);
+
             }
         }
         if (check == true)
@@ -147,7 +151,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         //  줌 상태일 때 속도 제한.
-        if (PlayerState.playerZoomCheck == true)
+        if (Input.GetButton("Zoom"))
         {
             moveSpeed = temp / 2;
         }
@@ -213,5 +217,12 @@ public class PlayerMove : MonoBehaviour
   void Gamecamoff() 
     {
         gamecamOn = false;
+    }
+
+    void DodgeOut()
+    {
+        moveSpeed *= 0.5f;
+        isDodge = false;
+
     }
 }
