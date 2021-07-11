@@ -100,7 +100,7 @@ public class PlayerMove : MonoBehaviour
         cc.Move(new Vector3(0, yVelocity, 0));
 
         //  대쉬 기능
-        if (Input.GetButton("Dash") && !Input.GetButton("Zoom"))
+        if (Input.GetButton("Dash") && PlayerState.playerZoomCheck == false)
         {
             moveSpeed = temp * 2;
         }
@@ -113,11 +113,12 @@ public class PlayerMove : MonoBehaviour
         //  플레이어 회전
         if (move != Vector3.zero && check == false)
         {
-            if (!Input.GetButton("Zoom"))
+            if (PlayerState.playerZoomCheck == false)
             {
-                rotate = Quaternion.LookRotation(new Vector3(move.x, 0, move.z));
-            }            
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotate, 15.0f * Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotate, 25.0f * Time.deltaTime);
+            }                        
+            rotate = Quaternion.LookRotation(new Vector3(move.x, 0, move.z));
+            //transform.rotation = rotate;
         }
 
         //  플레이어 점프
@@ -133,6 +134,8 @@ public class PlayerMove : MonoBehaviour
             {
                 dodgeMove = move;
                 check = true;
+                transform.rotation = rotate;
+                PlayerState.playerZoomCheck = false;
                 time = 0;
             }
         }
@@ -144,7 +147,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         //  줌 상태일 때 속도 제한.
-        if (Input.GetButton("Zoom"))
+        if (PlayerState.playerZoomCheck == true)
         {
             moveSpeed = temp / 2;
         }

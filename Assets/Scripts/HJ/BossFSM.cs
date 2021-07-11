@@ -105,6 +105,12 @@ public class BossFSM : MonoBehaviour
         //    bossState = State.Idle;
         //}
 
+        if(bossState != State.Move)
+        {
+            move = Vector3.zero;
+            am.SetFloat("Runspeed", move.magnitude);
+        }
+
         if (bossGroggyValue >= 10.0f)
         {
             bossState = State.Groggy;

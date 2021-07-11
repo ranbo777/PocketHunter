@@ -11,10 +11,13 @@ public class CameraMove : MonoBehaviour
 
     Ray hit;
 
+    PlayerMove pm;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Confined;
-        target = GameObject.Find("Player");        
+        target = GameObject.Find("Player");
+        pm = target.GetComponent<PlayerMove>();
     }
 
     private void LateUpdate()
@@ -24,25 +27,24 @@ public class CameraMove : MonoBehaviour
             xMove += Input.GetAxisRaw("Mouse X");
             transform.rotation = Quaternion.Euler(0, xMove, 0);
 
-
-            if (Input.GetButton("Zoom"))
-            {
-                yMove += Input.GetAxisRaw("Mouse Y");
-                transform.rotation = Quaternion.Euler(-yMove, xMove, 0);
-            }
-
             #region 원거리 줌 기능
-            if (!Input.GetButton("Zoom"))
+            if (PlayerState.playerZoomCheck == true)
             {
+                if (pm.check == false)
+                {
+                    yMove += Input.GetAxisRaw("Mouse Y");
+                    transform.rotation = Quaternion.Euler(-yMove, xMove, 0);
+
+                    target.transform.rotation = transform.rotation;
+                    transform.position = target.transform.position + transform.rotation * new Vector3(0, 0.5f, 0);                    
+                }
+            }
+            if(PlayerState.playerZoomCheck == false)
+            { 
                 yMove = 0;
                 target.transform.rotation = new Quaternion(0, target.transform.rotation.y, 0,
                     target.transform.rotation.w);
                 transform.position = target.transform.position - transform.rotation * new Vector3(0, -distance / 3, distance);
-            }
-            else
-            {
-                target.transform.rotation = transform.rotation;
-                transform.position = target.transform.position + transform.rotation * new Vector3(0, 0.5f, 0);
             }
         }
         #endregion

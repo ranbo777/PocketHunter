@@ -120,7 +120,7 @@ public class GameManger : MonoBehaviour
            // playTime2 == playTime; 
             playTime += Time.deltaTime;
         }
-        if (Input.GetButton("Zoom") && PlayerState.stunCheck ==false)
+        if (PlayerState.playerZoomCheck == true && PlayerState.stunCheck ==false)
         {
             crosshair.gameObject.SetActive(true);
         }
