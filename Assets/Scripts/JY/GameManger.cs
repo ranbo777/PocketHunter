@@ -112,7 +112,7 @@ public class GameManger : MonoBehaviour
 
         //  현재 플레이어 체력을 플레이어 체력 UI에 설정.
         playerHealthBar.sizeDelta = new Vector2(temp2 * pS.GetPlayerHP(), 25);
-        playerHealthTxt.text = pS.GetPlayerHP()+" / 100";
+        playerHealthTxt.text = pS.GetPlayerHP()+" / "+pS.playerMaxHP;
 
         if (isBattle == true)
         {

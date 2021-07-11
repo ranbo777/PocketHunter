@@ -92,6 +92,8 @@ GameObject:
   - component: {fileID: 821310752110505643}
   - component: {fileID: 7258608739275034331}
   - component: {fileID: 4458805269896518826}
+  - component: {fileID: 1436745031}
+  - component: {fileID: 1436745032}
   m_Layer: 7
   m_Name: Pokeball
   m_TagString: Player
@@ -117,7 +119,7 @@ Transform:
   - {fileID: 1705765018029655185}
   m_Father: {fileID: 6040402669269089958}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 360, y: 0, z: 0}
 --- !u!33 &7258608739275034331
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -167,6 +169,39 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!111 &1436745031
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454655829311861130}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 2e116588b50604040b5fad862ede33bd, type: 2}
+  - {fileID: 7400000, guid: 195b96385195d1b45a147fec16a0a916, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &1436745032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454655829311861130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44b3b6579e3e7f34b9c28abd1c3bed4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pm: {fileID: 6078007112294666497}
+  am: {fileID: 1436745031}
+  am1: {fileID: 7400000, guid: 2e116588b50604040b5fad862ede33bd, type: 2}
+  am2: {fileID: 7400000, guid: 195b96385195d1b45a147fec16a0a916, type: 2}
 --- !u!1 &1932898066994148717
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,7 +563,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5ebb93fc69caec488f153bc8f7ed2c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMaxHP: 100
+  playerMaxHP: 500
+  bF: {fileID: 0}
 --- !u!114 &4082872709735001133
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,7 +11,13 @@ public class P1BulletMove : MonoBehaviour
     Vector3 sPos;
     Vector3 tPos;
 
-    // Update is called once per frame
+    PlayerState pS;
+
+    private void Start()
+    {
+        pS = GameObject.Find("Player").GetComponent<PlayerState>();
+    }
+
     void Update()
     {
         time += Time.deltaTime;
@@ -31,6 +37,7 @@ public class P1BulletMove : MonoBehaviour
         handle2 = h2;
     }
 
+    //  탄환 이동 함수
     void BulletMove()
     {
         float move = time * speed;
@@ -47,11 +54,19 @@ public class P1BulletMove : MonoBehaviour
     {
         if (other.gameObject.tag.Equals("Player"))
         {
-            print("맞았다!");
-            Destroy(gameObject);
+            if(PlayerState.noHitCheck == false)
+            {
+                print("맞았다!");
+                pS.AddPlayerHP(-15.0f);
+                pS.AddStunGauge(1.0f);
+                Destroy(gameObject);
+            }            
         }
+    }
 
-        if(other.gameObject.tag.Equals("Ground"))
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag.Equals("Ground"))
         {
             Destroy(gameObject);
         }

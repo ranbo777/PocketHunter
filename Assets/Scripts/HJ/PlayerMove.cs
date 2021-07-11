@@ -33,6 +33,8 @@ public class PlayerMove : MonoBehaviour
     //  회피 쿨타임 및 회피 중 다른 행동을 제한하는 체크 변수
     public bool check = false;
 
+    Animation am;
+
     // JY 아이템 상호작용 관련 변수
     bool iDown;
     public GameObject nearObject;
@@ -51,6 +53,7 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         bF = GameObject.Find("Boss").GetComponent<BossFSM>();
+        am = gameObject.GetComponent<Animation>();
 
         temp = moveSpeed;
         cc = gameObject.GetComponent<CharacterController>();
@@ -122,10 +125,7 @@ public class PlayerMove : MonoBehaviour
         {
             yVelocity = jumpPower;
         }
-        
-        
-
-
+               
         //  플레이어 회피        
         if (time >= dodgeCooltime && check == false && move!=Vector3.zero)
         {
@@ -138,6 +138,7 @@ public class PlayerMove : MonoBehaviour
         }
         if (check == true)
         {
+            PlayerState.noHitCheck = true;
             cc.Move(dodgeMove * 10 * Time.deltaTime);
             Invoke("CheckOff", 0.217f);
         }
@@ -182,10 +183,13 @@ public class PlayerMove : MonoBehaviour
     void CheckOff()
     {
         check = false;
+        PlayerState.noHitCheck = false;
     }
 
     private void OnTriggerStay(Collider other)
     {
+
+        //  보스에게 밀려나는 판정
         if (other.gameObject.tag.Equals("Boss"))
         {
             bossMove = new Vector3(bF.move.x, 0, bF.move.z) * bF.bossSpeed;
@@ -202,10 +206,6 @@ public class PlayerMove : MonoBehaviour
             nearObject = other.gameObject;
         }
     }
-
-   
-
-  
 
   void Gamecamoff() 
     {

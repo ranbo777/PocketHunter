@@ -16,7 +16,7 @@ public class BulletMove : MonoBehaviour
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
-        bF = GameObject.Find("Boss").GetComponent<BossFSM>();
+        if (GameObject.Find("Boss") != null) { bF = GameObject.Find("Boss").GetComponent<BossFSM>(); }
         pf = GameObject.Find("Player").GetComponent<PlayerFire>();
         
     }
