@@ -12,29 +12,62 @@ public class PlayerState : MonoBehaviour
     float playerStunGauge = 0;
     #endregion
 
+    #region 플레이어 스태미너 변수
+    public float playerMaxMP = 100.0f;
+    float playerMP;
+    float recoveryMPTime = 0;
+    #endregion
+
     #region 플레이어 상태 체크 변수    
     public static bool stunCheck = false;
     public static bool poisonCheck = false;
     public static bool sleepCheck = false;
     public static bool noHitCheck = false;
+    public static bool playerZoomCheck = false;
     #endregion
 
     GameManger gm;
+    PlayerMove pm;
     public BossFSM bF;
+
+    float time = 0;
 
     //  0b_1110 스턴   0b_1101 독    0b_1011 수면
     void Start()
     {
         playerHP = playerMaxHP;
+        playerMP = playerMaxMP;
         
         if(bF == null) { bF = GameObject.Find("Boss").GetComponent<BossFSM>(); }
+        pm = gameObject.GetComponent<PlayerMove>();
         gm = GameObject.Find("GameManager").GetComponent<GameManger>();
         playerState = 0b_1111;
     }
 
     void Update()
     {
+        time += Time.deltaTime;
+
+        if (Input.GetButtonDown("Zoom"))
+        {
+            if (time >= 0.2f)
+            {
+                if (playerZoomCheck == false && pm.check == false) { playerZoomCheck = true; print("줌 On"); }
+                else { playerZoomCheck = false; print("줌 Off"); }
+                time = 0;
+            }
+        }
+
         playerHP = Mathf.Max(0, playerHP);
+        playerMP = Mathf.Max(0, playerMP);
+
+        //  MP 회복
+        recoveryMPTime += Time.deltaTime;
+        if(recoveryMPTime >= 3.0f && playerMP < 100.0f)
+        {
+            playerMP += Time.deltaTime * 5.0f;
+            playerMP = Mathf.Min(100, playerMP);
+        }
 
         #region 플레이어 스턴
         if (playerStunGauge >= 5.0f)
@@ -68,6 +101,7 @@ public class PlayerState : MonoBehaviour
     void PlayerStun(int value)
     {
         print("스턴걸림");
+        playerZoomCheck = false;
         stunCheck = true;
         gm.stunEffect.gameObject.SetActive(true);
         
@@ -94,14 +128,29 @@ public class PlayerState : MonoBehaviour
     {
         playerStunGauge += value;
     }
+
+    #region 체력, 스태미나 관련 함수
     public void AddPlayerHP(float value)
     {
         playerHP += value;
     }
+
     public float GetPlayerHP()
     {
         return Mathf.Max(0, playerHP);
     }
+
+    public void AddPlayerMP(float value)
+    {
+        playerMP += value;
+        recoveryMPTime = 0;
+    }
+
+    public float GetPlayerMP()
+    {
+        return Mathf.Max(0, playerMP);
+    }
+    #endregion
 
     private void OnTriggerEnter(Collider other)
     {

@@ -6,7 +6,7 @@ public class BossFSM : MonoBehaviour
 {
     #region 보스 이동 변수
     public Vector3 move;
-    public float bossSpeed = 4.0f;
+    public float bossSpeed = 5.0f;
     #endregion
 
     #region 보스 체력 변수
@@ -53,12 +53,14 @@ public class BossFSM : MonoBehaviour
 
     float distance;
 
+    float time2 = 0;
+
     GameObject target;
     PlayerState targetState;
     CharacterController cc;
     Animator am;
+
     float time;
-    GameManger gm;
 
     public GameObject BossItem;
     public GameObject bossHpUI;
@@ -93,11 +95,14 @@ public class BossFSM : MonoBehaviour
 
         yVelocity += gravity * Time.deltaTime;
 
-        cc.Move(new Vector3(0, yVelocity, 0));
+        //cc.Move(new Vector3(0, yVelocity, 0));
 
         distance = (target.transform.position - transform.position).magnitude;
 
+        //print(distance);
+
         time += Time.deltaTime;
+        time2 += Time.deltaTime;
 
         //if (distance <= bossAttackDistance && bossState != State.Attack)
         //{
@@ -115,36 +120,81 @@ public class BossFSM : MonoBehaviour
             bossState = State.Groggy;
             print("보스 경직");
         }
-        
+
+
+        if (time2 >= 0.5f) { print(distance);  time2 = 0; }
+
         if(HP <= 0)
         {
             bossState = State.Dead;
         }
 
+        if(bossState != State.Move)
+        {
+            move = Vector3.zero;
+            am.SetFloat("Runspeed", move.magnitude);
+        }
+
         switch(bossState)
         {
             case State.Idle:
-                //LookTarget();
-                if (Input.GetKeyDown(KeyCode.O))
-                {
-                    p1Check = true;
-                    bossState = State.Pattern_1;
-                    print("패턴1 실행");
-                }
-                if (Input.GetKeyDown(KeyCode.P))
-                {
-                    p2Check = true;
-                    bossState = State.Pattern_2;
-                    print("패턴2 실행");
-                }
+                LookTarget();
+                am.SetBool("OnShoot", false);
+
+                //if(distance <= 2.0f)
+                //{
+                //    p2Check = true;
+                //    bossState = State.Pattern_2;
+                //    print("패턴2 실행");
+                //}
+
+                //if(distance > 2.0f && distance <= 8.0f)
+                //{
+                //    int p = Random.Range(0, 100);
+                //    if(p >= 90) 
+                //    {
+                //        p1Check = true;
+                //        bossState = State.Pattern_1;
+                //        print("패턴1 실행");
+                //    }
+                //    else { bossState = State.Move; }
+                //}
+
+                //if (distance > 8.0f)
+                //{
+                //    int p = Random.Range(0, 100);
+
+                //    if (p <= 80)
+                //    {
+                //    p1Check = true;
+                //    bossState = State.Pattern_1;
+                //    print("패턴1 실행");
+                //    }
+                //    else { bossState = State.Move; }
+
+                //}
+
+                //if (Input.GetKeyDown(KeyCode.O))
+                //{
+                //    p1Check = true;
+                //    bossState = State.Pattern_1;
+                //    print("패턴1 실행");
+                //}
+                //if (Input.GetKeyDown(KeyCode.P))
+                //{
+                //    p2Check = true;
+                //    bossState = State.Pattern_2;
+                //    print("패턴2 실행");
+                //}
                 break;
             case State.Move:
                 LookTarget();
                 move = new Vector3(target.transform.position.x - transform.position.x, 0, 
                     target.transform.position.z - transform.position.z);
                 move.Normalize();
-                am.SetFloat("Runspeed", move.magnitude);
+                am.SetFloat("Runspeed", move.magnitude);                
                 cc.Move(move * bossSpeed * Time.deltaTime);
+                if(distance <= 1.5f) { bossState = State.Idle; }                                
                 break;
             case State.Groggy:
                 bossGroggyTime += Time.deltaTime;
@@ -161,10 +211,10 @@ public class BossFSM : MonoBehaviour
                 break;
             case State.Pattern_1:
                 if(p1Check == true) 
-                { 
-                    StartCoroutine(Pattern_1(15)); 
+                {
+                    am.SetBool("OnShoot", true);
                     p1Check = false;
-                    Invoke("RetrunState", 2.5f);
+                    Invoke("RetrunState", 4.0f);
                 }                
                 break;
             case State.Pattern_2:
@@ -172,7 +222,7 @@ public class BossFSM : MonoBehaviour
                 {
                     Pattern_2();
                     p2Check = false;
-                    Invoke("RetrunState", 1.5f);                    
+                    Invoke("RetrunState", 2.5f);                    
                 }
                 break;
             case State.Dead:
@@ -181,13 +231,6 @@ public class BossFSM : MonoBehaviour
         }        
         //  보스 hp가 0 밑으로 내려가지 않게 설정.
         HP = Mathf.Max(0, HP);
-    }
-
-    private void BossAttack(float value, float stunValue)
-    {
-        print("공격해쓰요");
-        targetState.AddPlayerHP(-value);
-        targetState.AddStunGauge(stunValue);
     }
 
     //  보스가 외부에서 데미지를 받는 함수.
@@ -212,7 +255,7 @@ public class BossFSM : MonoBehaviour
     IEnumerator Pattern_1(int count)
     {
         int count_ = count;
-        while (count_ > 0)
+        while (count_ > 0 && bossState != State.Groggy)
         {
             count_--;
             p1BossPos = transform.position + transform.up;        

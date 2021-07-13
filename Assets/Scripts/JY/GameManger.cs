@@ -32,6 +32,7 @@ public class GameManger : MonoBehaviour
     public Text playerHealthTxt;
     public RectTransform playerHealthBar;
     public Text playerStaminaTxt;
+    public RectTransform playerStaminaBar;
     public Text playerAmmoTxt;
     public Text playerCoinTxt;
 
@@ -63,8 +64,10 @@ public class GameManger : MonoBehaviour
     //  보스 정보를 가지고 있는 변수.
     BossFSM bF;
     PlayerState pS;
+
     float temp;
     float temp2;
+    float temp3;
 
     public PlayerMove pm;
     //  플레이어 공격 타입. true=원거리근거리,  false=
@@ -83,6 +86,7 @@ public class GameManger : MonoBehaviour
         //  보스 체력에 비례한 보스체력바 비율
         temp = BossHealthBar.rect.width / bF.maxBossHP;
         temp2 = playerHealthBar.rect.width / pS.playerMaxHP;
+        temp3 = playerStaminaBar.rect.width / pS.playerMaxMP;
         // 메인 메뉴의 현재 시간 초
         //int hour = (int)(playTime / 3600);
         //int min = (int)((playTime - hour * 3600) / 60);
@@ -94,7 +98,7 @@ public class GameManger : MonoBehaviour
 
 public void GameStart()
     {
-        
+        Cursor.visible = false;
         isBattle = true;
 
        
@@ -121,13 +125,17 @@ public void GameStart()
         playerHealthBar.sizeDelta = new Vector2(temp2 * pS.GetPlayerHP(), 25);
         playerHealthTxt.text = pS.GetPlayerHP()+" / "+pS.playerMaxHP;
 
+        //  현재 플레이어 스태미나를 플레이어 스태미나 UI에 설정.
+        playerStaminaBar.sizeDelta = new Vector2(temp3 * pS.GetPlayerMP(), 25);
+        playerStaminaTxt.text = (int)pS.GetPlayerMP() + " / " + pS.playerMaxMP;
+
         if (isBattle == true)
         {
 
            // playTime2 == playTime; 
             playTime += Time.deltaTime;
         }
-        if (Input.GetButton("Zoom") && PlayerState.stunCheck ==false)
+        if (PlayerState.playerZoomCheck == true && PlayerState.stunCheck ==false)
         {
             crosshair.gameObject.SetActive(true);
         }
@@ -157,6 +165,8 @@ public void GameStart()
 
         if (Input.GetKey(KeyCode.Escape))
         {
+            Cursor.visible = true;
+
             isBattle = false;
             playTime2Txt.text = playTimeTxt.text;
 

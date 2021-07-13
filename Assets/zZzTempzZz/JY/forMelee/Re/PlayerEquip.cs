@@ -89,7 +89,6 @@ public class PlayerEquip : MonoBehaviour
             }
             print(weaponIndex);
             equipWeapon = weapons[weaponIndex];
-            pm.anim.SetTrigger("doSwap");
 
             equipWeapon.SetActive(true);
 

@@ -10,7 +10,7 @@ public class PlayerMove : MonoBehaviour
     public float moveSpeed = 1.0f;
     BossFSM bF;
     CharacterController cc;
-    
+    PlayerState ps;
 
     GameManger gm;
     float temp;
@@ -42,7 +42,6 @@ public class PlayerMove : MonoBehaviour
     public bool[] hasItem;
     public bool[] hasTrace;
     public bool isDodge;
-    public Animator anim;
 
     public bool gamecamOn = true;
     //
@@ -53,6 +52,7 @@ public class PlayerMove : MonoBehaviour
 
     void Start()
     {
+        ps = gameObject.GetComponent<PlayerState>();
         bF = GameObject.Find("Boss").GetComponent<BossFSM>();
         am = gameObject.GetComponent<Animation>();
 
@@ -101,9 +101,10 @@ public class PlayerMove : MonoBehaviour
         cc.Move(new Vector3(0, yVelocity, 0));
 
         //  대쉬 기능
-        if (Input.GetButton("Dash") && !Input.GetButton("Zoom"))
+        if (Input.GetButton("Dash") && PlayerState.playerZoomCheck == false && ps.GetPlayerMP() >= 1.0f)
         {
             moveSpeed = temp * 2;
+            ps.AddPlayerMP(-Time.deltaTime * 4.0f);
         }
         else
         {
@@ -114,11 +115,12 @@ public class PlayerMove : MonoBehaviour
         //  플레이어 회전
         if (move != Vector3.zero && check == false)
         {
-            if (!Input.GetButton("Zoom"))
+            if (PlayerState.playerZoomCheck == false)
             {
-                rotate = Quaternion.LookRotation(new Vector3(move.x, 0, move.z));
-            }            
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotate, 15.0f * Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotate, 25.0f * Time.deltaTime);
+            }
+            rotate = Quaternion.LookRotation(new Vector3(move.x, 0, move.z));
+            //transform.rotation = rotate;
         }
 
         //  플레이어 점프
@@ -130,16 +132,14 @@ public class PlayerMove : MonoBehaviour
         //  플레이어 회피        
         if (time >= dodgeCooltime && check == false && move!=Vector3.zero)
         {
-            if (Input.GetButtonDown("Dodge"))
+            if (Input.GetButtonDown("Dodge") && ps.GetPlayerMP() >= 15.0f)
             {
-                anim.SetTrigger("doDodge");
                 dodgeMove = move;
                 check = true;
+                transform.rotation = rotate;
+                PlayerState.playerZoomCheck = false;
+                ps.AddPlayerMP(-15.0f);
                 time = 0;
-                isDodge = true;
-
-                
-                Invoke("DodgeOut", 0.4f);
 
             }
         }
@@ -151,7 +151,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         //  줌 상태일 때 속도 제한.
-        if (Input.GetButton("Zoom"))
+        if (PlayerState.playerZoomCheck == true)
         {
             moveSpeed = temp / 2;
         }
@@ -219,10 +219,4 @@ public class PlayerMove : MonoBehaviour
         gamecamOn = false;
     }
 
-    void DodgeOut()
-    {
-        moveSpeed *= 0.5f;
-        isDodge = false;
-
-    }
 }
