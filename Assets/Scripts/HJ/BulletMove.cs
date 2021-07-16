@@ -46,12 +46,16 @@ public class BulletMove : MonoBehaviour
             bF.TakeDamage(pf.attackValue, pf.groggyValue);
             Destroy(gameObject);            
         }
+    }
+
+    private void OnTriggerExit(Collider col)
+    {
         if (col.tag.Equals("Ground"))
         {
             Destroy(gameObject);
         }
     }
-    
+
     //  탄환이 허공에 5초 이상 존재 할 경우 탄환을 삭제하는 함수.
     IEnumerator DeleteBullet(float t)
     {

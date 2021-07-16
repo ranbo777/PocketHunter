@@ -103,8 +103,12 @@ public class PlayerMove : MonoBehaviour
         //  대쉬 기능
         if (Input.GetButton("Dash") && PlayerState.playerZoomCheck == false && ps.GetPlayerMP() >= 1.0f)
         {
-            moveSpeed = temp * 2;
-            ps.AddPlayerMP(-Time.deltaTime * 4.0f);
+            if(!PlayerState.stunCheck == true)
+            {
+                moveSpeed = temp * 2;
+                ps.AddPlayerMP(-Time.deltaTime * 4.0f);
+            }
+            
         }
         else
         {

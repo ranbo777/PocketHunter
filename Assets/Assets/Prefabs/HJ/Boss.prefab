@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 612584632}
   - component: {fileID: 612584633}
-  - component: {fileID: 612584634}
-  - component: {fileID: 612584635}
   m_Layer: 3
   m_Name: BossCol
   m_TagString: Boss
@@ -26,11 +24,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 612584631}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.030503279, y: -0.030503165, z: 0.70644987, w: 0.70644724}
+  m_LocalPosition: {x: 0.36207137, y: 0, z: 0.024627674}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 8423039338927317963}
+  m_Father: {fileID: 8423039339496341705}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &612584633
@@ -47,39 +45,6 @@ CapsuleCollider:
   m_Height: 1.05
   m_Direction: 1
   m_Center: {x: 0, y: 0.55, z: 0}
---- !u!111 &612584634
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 612584631}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: dea213bef97824546b15118a9213a06e, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: dea213bef97824546b15118a9213a06e, type: 2}
-  - {fileID: 7400000, guid: 2edbbd883f85e294f96bc4f3012bee73, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
---- !u!114 &612584635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 612584631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e4e5a68698742745b89e81df8a0eb1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bF: {fileID: 8423039338927317966}
-  am: {fileID: 612584634}
-  ac1: {fileID: 7400000, guid: dea213bef97824546b15118a9213a06e, type: 2}
-  ac2: {fileID: 7400000, guid: 2edbbd883f85e294f96bc4f3012bee73, type: 2}
 --- !u!1 &1025892013
 GameObject:
   m_ObjectHideFlags: 0
@@ -1307,7 +1272,6 @@ Transform:
   m_Children:
   - {fileID: 8423039339442523033}
   - {fileID: 8423039339514763399}
-  - {fileID: 612584632}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1918,6 +1882,7 @@ Transform:
   m_Children:
   - {fileID: 8423039338539378554}
   - {fileID: 8423039339385913997}
+  - {fileID: 612584632}
   m_Father: {fileID: 8423039338125674771}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

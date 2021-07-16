@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.75
+  trail: {fileID: 9063449699058260602}
 --- !u!1 &9063449699058260602
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,12 +122,12 @@ GameObject:
   - component: {fileID: 4807897124478100852}
   - component: {fileID: 8294220705498575449}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4807897124478100852
 Transform:
   m_ObjectHideFlags: 0

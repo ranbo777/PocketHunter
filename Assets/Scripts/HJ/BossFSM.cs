@@ -51,6 +51,11 @@ public class BossFSM : MonoBehaviour
     [HideInInspector] public bool p2ColType = false;
     #endregion
 
+    #region 보스 패턴3 변수
+    bool p3Check = true;
+    float p3MoveTime = 0;
+    #endregion
+
     float distance;
 
     float time2 = 0;
@@ -74,6 +79,7 @@ public class BossFSM : MonoBehaviour
         Groggy,
         Pattern_1,
         Pattern_2,
+        Pattern_3,
         Dead
     }
     public State bossState;
@@ -115,24 +121,19 @@ public class BossFSM : MonoBehaviour
         //    bossState = State.Idle;
         //}
 
-        if (bossGroggyValue >= 10.0f)
+        if (bossGroggyValue >= 10.0f && bossState != State.Pattern_3)
         {
             bossState = State.Groggy;
+            am.SetBool("OnGroggy", true);
             print("보스 경직");
         }
 
 
-        if (time2 >= 0.5f) { print(distance);  time2 = 0; }
+        //if (time2 >= 0.5f) { print(distance);  time2 = 0; }
 
         if(HP <= 0)
         {
             bossState = State.Dead;
-        }
-
-        if(bossState != State.Move)
-        {
-            move = Vector3.zero;
-            am.SetFloat("Runspeed", move.magnitude);
         }
 
         switch(bossState)
@@ -140,39 +141,49 @@ public class BossFSM : MonoBehaviour
             case State.Idle:
                 LookTarget();
                 am.SetBool("OnShoot", false);
+                am.SetFloat("Runspeed", 0);
 
-                //if(distance <= 2.0f)
-                //{
-                //    p2Check = true;
-                //    bossState = State.Pattern_2;
-                //    print("패턴2 실행");
-                //}
+                move = Vector3.zero;
+                am.SetFloat("Runspeed", move.magnitude);
 
-                //if(distance > 2.0f && distance <= 8.0f)
-                //{
-                //    int p = Random.Range(0, 100);
-                //    if(p >= 90) 
-                //    {
-                //        p1Check = true;
-                //        bossState = State.Pattern_1;
-                //        print("패턴1 실행");
-                //    }
-                //    else { bossState = State.Move; }
-                //}
+                if (distance <= 2.0f)
+                {
+                    p2Check = true;
+                    bossState = State.Pattern_2;
+                    print("패턴2 실행");
+                }
 
-                //if (distance > 8.0f)
-                //{
-                //    int p = Random.Range(0, 100);
+                if (distance > 2.0f && distance <= 8.0f)
+                {
+                    int p = Random.Range(0, 100);
+                    if (p >= 90)
+                    {
+                        p1Check = true;
+                        bossState = State.Pattern_1;
+                        print("패턴1 실행");
+                    }
+                    else { bossState = State.Move; }
+                }
 
-                //    if (p <= 80)
-                //    {
-                //    p1Check = true;
-                //    bossState = State.Pattern_1;
-                //    print("패턴1 실행");
-                //    }
-                //    else { bossState = State.Move; }
+                if (distance > 8.0f)
+                {
+                    int p = Random.Range(0, 100);
 
-                //}
+                    if (p <= 20)
+                    {
+                        p1Check = true;
+                        bossState = State.Pattern_1;
+                        print("패턴1 실행");
+                    }
+                    else 
+                    {
+                        p3Check = true;
+                        p3MoveTime = 0;
+                        bossState = State.Pattern_3;
+                        print("패턴3 실행");
+                    }
+
+                }
 
                 //if (Input.GetKeyDown(KeyCode.O))
                 //{
@@ -198,12 +209,10 @@ public class BossFSM : MonoBehaviour
                 break;
             case State.Groggy:
                 bossGroggyTime += Time.deltaTime;
-                am.SetBool("OnGroggy", true);
-                if(bossGroggyTime >= 3.0f)
+                if(bossGroggyTime >= 5.0f)
                 {
                     bossGroggyValue = 0;
                     bossGroggyTime = 0;
-                    bossState = State.Idle;
                     am.SetBool("OnGroggy", false);
                     am.SetBool("OnIdle", true);
                     print("보스 경직 해제");
@@ -214,7 +223,7 @@ public class BossFSM : MonoBehaviour
                 {
                     am.SetBool("OnShoot", true);
                     p1Check = false;
-                    Invoke("RetrunState", 4.0f);
+                    Invoke("ReturnState", 4.0f);
                 }                
                 break;
             case State.Pattern_2:
@@ -222,7 +231,23 @@ public class BossFSM : MonoBehaviour
                 {
                     Pattern_2();
                     p2Check = false;
-                    Invoke("RetrunState", 2.5f);                    
+                    Invoke("ReturnState", 2.5f);                    
+                }
+                break;
+            case State.Pattern_3:
+                p3MoveTime += Time.deltaTime;
+                move = new Vector3(target.transform.position.x - transform.position.x, 0,
+                    target.transform.position.z - transform.position.z);                
+                if(p3MoveTime >= 0.5f && p3MoveTime <= 1.5f)
+                {
+                    LookTarget();
+                    cc.Move(move * 2.0f * Time.deltaTime);
+                }                
+                if (p3Check == true)
+                {
+                    p3Check = false;
+                    Pattern_3();
+                    Invoke("ReturnState", 5.0f);
                 }
                 break;
             case State.Dead:
@@ -287,8 +312,13 @@ public class BossFSM : MonoBehaviour
         p2ColType = true;
     }
 
+    void Pattern_3()
+    {
+        am.SetBool("OnJumpAttack", true);
+    }
+
     //  보스가 패턴 사용 후 Idle 상태로 넘어갈 때 까지 걸리는 딜레이 함수
-    void RetrunState()
+    void ReturnState()
     {
         bossState = State.Idle;
         print("패턴 딜레이 종료");

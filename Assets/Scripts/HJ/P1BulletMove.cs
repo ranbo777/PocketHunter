@@ -6,6 +6,7 @@ public class P1BulletMove : MonoBehaviour
 {
     float time = 0;
     public float speed = 0.75f;
+    public GameObject trail;
     Vector3 handle1;
     Vector3 handle2;
     Vector3 sPos;
@@ -16,11 +17,14 @@ public class P1BulletMove : MonoBehaviour
     private void Start()
     {
         pS = GameObject.Find("Player").GetComponent<PlayerState>();
+        
     }
 
     void Update()
     {
         time += Time.deltaTime;
+
+        if(time >= 0.01f) { trail.SetActive(true); }
         
         if(time >= 3.0f) { Destroy(gameObject); }
     }

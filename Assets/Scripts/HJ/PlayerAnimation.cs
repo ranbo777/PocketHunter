@@ -12,6 +12,8 @@ public class PlayerAnimation : MonoBehaviour
     {
         if(pm == null) { gameObject.transform.parent.GetComponent<PlayerMove>(); }
         if(am == null) { am = gameObject.GetComponent<Animation>(); }
+        am.AddClip(am1, "Dodge");
+        am.AddClip(am2, "Stun");
     }
 
     // Update is called once per frame
@@ -32,17 +34,18 @@ public class PlayerAnimation : MonoBehaviour
 
         if (pm.check == true)
         {
-            am.clip = am1;
+            am.clip = am.GetClip("Dodge");
             am.Play();
         }
         if (PlayerState.stunCheck == true)
         {
-            am.clip = am2;
+
+            am.clip = am.GetClip("Stun");
             am.Play();
         }
         else if (PlayerState.stunCheck == false)
         {
-            am.Stop("P_StunHJ");
+            am.Stop("Stun");
         }
 
     }
