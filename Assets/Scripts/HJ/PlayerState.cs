@@ -31,6 +31,7 @@ public class PlayerState : MonoBehaviour
     public BossFSM bF;
 
     float time = 0;
+    public bool isDead = false;
 
     //  0b_1110 스턴   0b_1101 독    0b_1011 수면
     void Start()
@@ -132,6 +133,18 @@ public class PlayerState : MonoBehaviour
         noHitCheck = true;
     }
 
+    void PlayerDead()
+    {
+        if (playerHP == 0) 
+        {
+           
+
+
+        }
+
+    }
+
+    
     public void AddStunGauge(float value)
     {
         playerStunGauge += value;

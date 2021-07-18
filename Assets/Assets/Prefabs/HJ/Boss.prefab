@@ -1327,8 +1327,12 @@ MonoBehaviour:
   - {fileID: 3574412973235742111, guid: e7b21bff376e86645881eb84bcbd14b5, type: 3}
   BossSteps: 0
   TraceDensity: 0
+  VictoryPanel: {fileID: 0}
+  VictoryButton: {fileID: 0}
+  playTimeTxt1: {fileID: 0}
   BossItem: {fileID: 8782627306703031216, guid: 4b1d008a0f0a0a64d8fabc0fb6471538, type: 3}
   bossHpUI: {fileID: 0}
+  isDead: 0
   bossState: 0
 --- !u!143 &292568768
 CharacterController:

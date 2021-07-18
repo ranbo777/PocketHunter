@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossFSM : MonoBehaviour
 {
@@ -68,6 +69,7 @@ public class BossFSM : MonoBehaviour
     private float dist;
     public bool BossRest;
 
+    
     #endregion
 
     #region 보스 흔적 드랍 변수
@@ -85,18 +87,22 @@ public class BossFSM : MonoBehaviour
     int AwakeCounter = 0;
     float distance;
 
+    public GameObject VictoryPanel;
+    public GameObject VictoryButton;
     float time2 = 0;
 
     GameObject target;
     PlayerState targetState;
     CharacterController cc;
     Animator am;
+    GameManger gm;
 
     float time;
 
+    public Text playTimeTxt1;
     public GameObject BossItem;
     public GameObject bossHpUI;
-    
+    public bool isDead = false;
 
     //  보스 FSM
     public enum State
@@ -120,7 +126,7 @@ public class BossFSM : MonoBehaviour
         targetState = target.GetComponent<PlayerState>();
 
         HP = maxBossHP;
-        bossState = State.Idle;
+        bossState = State.Patrol;
 
         cc = gameObject.GetComponent<CharacterController>();
         BossRest = true;
@@ -128,7 +134,7 @@ public class BossFSM : MonoBehaviour
         //패트롤
         waypointIndex = 0;
         LookPatrolTarget();
-
+      //  gm.playTimeTxt.text = GameObject.Find("GameManager").GetComponent<string>().playTimeTxt;
     }
 
     void Update()
@@ -166,6 +172,8 @@ public class BossFSM : MonoBehaviour
             print("보스 경직");
         }
 
+        if(Input.GetKey(KeyCode.O))
+            { bossState = State.Dead; }
 
         //if (time2 >= 0.5f) { print(distance);  time2 = 0; }
 
@@ -307,6 +315,7 @@ public class BossFSM : MonoBehaviour
                 break;
             case State.Dead:
                 OnDestroyBoss();
+                isDead = true;
                 break;
 
             case State.Patrol:
@@ -453,16 +462,36 @@ public class BossFSM : MonoBehaviour
     }
 
     //보스 죽음
-    void OnDestroyBoss()
+    public void OnDestroyBoss()
     {
         Vector3 Revise = new Vector3(0, 1, 0);
-
-
         GameObject go = Instantiate(BossItem);
         go.SetActive(true);
         go.transform.position = transform.position - Revise;
-        Destroy(gameObject);
+        VictoryPanel.SetActive(true);
         OffBossUI();
+        VictoryUI();
+
+       // playTimeTxt1.text = gm.playTimeTxt.text;
+        Destroy(gameObject);
+        
+
+    }
+
+
+    public void VictoryUI()
+    {
+       
+        StartCoroutine(BossDead());
+
+        IEnumerator BossDead()
+        {
+           
+            yield return new WaitForSeconds(5f); //0.6 프레임 대기
+            gm.VictoryButton.SetActive(true);
+
+        }
+
     }
 
     public void OffBossUI()

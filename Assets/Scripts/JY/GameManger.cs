@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameManger : MonoBehaviour
 {
 
-
+    PlayerState ps;
     public GameObject menuCam;
     public GameObject gameCam;
     public GameObject player;
@@ -22,12 +22,18 @@ public class GameManger : MonoBehaviour
 
     public GameObject menuPanel;
     public GameObject gamePanel;
+    public GameObject DeadPanel;
+
+
+    public GameObject Scoreball1;
+    public GameObject Scoreball2;
+    public GameObject Scoreball3;
    
 
     public Text maxTimeTxt;
     public Text BossStageTxt;
     public Text playTimeTxt;
-    public Text playTime2Txt;
+    public GameObject VictoryButton;
 
     public Text playerHealthTxt;
     public RectTransform playerHealthBar;
@@ -81,7 +87,7 @@ public class GameManger : MonoBehaviour
         bF = GameObject.Find("Boss").GetComponent<BossFSM>();
         pS = GameObject.Find("Player").GetComponent<PlayerState>();
 
-       
+        
 
         //  보스 체력에 비례한 보스체력바 비율
         temp = BossHealthBar.rect.width / bF.maxBossHP;
@@ -100,8 +106,9 @@ public void GameStart()
     {
         Cursor.visible = false;
         isBattle = true;
+        VictoryButton.SetActive(false);
 
-       
+        DeadPanel.SetActive(false);
         menuCam.SetActive(false);
         gameCam.SetActive(true);
         pm.gamecamOn = true;
@@ -143,15 +150,18 @@ public void GameStart()
         {
             crosshair.gameObject.SetActive(false);
         }
+
+        
+
     }
     void MeleeCheck()
     {
         Melee = false;
     }
 
+    
 
-
-    private void LateUpdate()
+    public void LateUpdate()
     {
         BossStageTxt.text = bossname;
         // 현재 시간 표기
@@ -162,13 +172,61 @@ public void GameStart()
         playTimeTxt.text = string.Format("{0:00}", hour) + " : " + string.Format("{0:00}", min) + " : " + string.Format("{0:00}", second);
 
 
+        void ScoreCheck()
+        {
+           
+
+            if (bF.isDead != false)
+            {
+                              
+
+                if (min <= 0)
+                {
+                   
+                    Scoreball1.SetActive(true);
+                    Scoreball2.SetActive(true);
+                    Scoreball3.SetActive(true);
+                }
+                else if (second <= 6)
+                {
+                    print("죽");
+                    Scoreball1.SetActive(false);
+                    Scoreball2.SetActive(true);
+                    Scoreball3.SetActive(true);
+                }
+                else if (min <= 10)
+                {
+                    Scoreball1.SetActive(false);
+                    Scoreball2.SetActive(false);
+                    Scoreball3.SetActive(true);
+                }
+                else if (min <= 13)
+                {
+                    Scoreball1.SetActive(false);
+                    Scoreball2.SetActive(false);
+                    Scoreball3.SetActive(false);
+                }
+
+
+            }
+            else
+            { }    
+        }
+
+        
+
+
+        
 
         if (Input.GetKey(KeyCode.Escape))
         {
+
+            bF.VictoryPanel.SetActive(false);
+            bF.VictoryButton.SetActive(false);
+
             Cursor.visible = true;
 
             isBattle = false;
-            playTime2Txt.text = playTimeTxt.text;
 
             Vector3 anchor = new Vector3(0, 14, -10);
             Quaternion anchor2 = new Quaternion(45, 0, 0, 0);
@@ -189,14 +247,35 @@ public void GameStart()
 
 
         }
-        
-
-       
 
 
-        // ** 간소화 예정
-        #region (JY) Trace UI 간소화 예정
-        if (pm.hasTrace [0] == true) 
+        if (pS.GetPlayerHP() == 0)
+        {
+            
+            DeadPanel.SetActive(true);
+            VictoryButton.SetActive(true);
+            gamePanel.SetActive(false);
+            menuPanel.SetActive(false);
+           
+            ps.isDead = true;
+            ScoreCheck(); 
+            Scoreball1.SetActive(false);
+            Scoreball2.SetActive(false);
+            Scoreball3.SetActive(false);
+
+            Destroy(gameObject);
+        }
+
+        if (bF.isDead == true)
+        {
+          
+            ScoreCheck();
+        }
+
+
+            // ** 간소화 예정
+            #region (JY) Trace UI 간소화 예정
+            if (pm.hasTrace [0] == true) 
         {
             Trace.SetActive(true);
         }

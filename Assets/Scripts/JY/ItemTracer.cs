@@ -8,6 +8,7 @@ public class ItemTracer : MonoBehaviour
     public Vector3 move;
     public GameObject BPoint;
     public int bugSpeed = 5;
+    BossFSM bF;
 
     void Start()
     {
@@ -17,8 +18,8 @@ public class ItemTracer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-            use();
+        if (BPoint != null)
+        { use(); }
        
     }
     public void use()

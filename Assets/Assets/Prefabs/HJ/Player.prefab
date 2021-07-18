@@ -567,6 +567,7 @@ MonoBehaviour:
   playerMaxHP: 200
   playerMaxMP: 200
   bF: {fileID: 0}
+  isDead: 0
 --- !u!114 &4082872709735001133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -740,7 +741,7 @@ PrefabInstance:
       objectReference: {fileID: 7134550588212779058}
     - target: {fileID: 1904772500208245378, guid: ec7acb646187a0942b95466806fc30c6, type: 3}
       propertyPath: rate
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1904772500208245378, guid: ec7acb646187a0942b95466806fc30c6, type: 3}
       propertyPath: meleeArea
