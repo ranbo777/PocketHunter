@@ -2714,10 +2714,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 292568768, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
-      propertyPath: m_SlopeLimit
-      value: 60
-      objectReference: {fileID: 0}
     - target: {fileID: 8423039338927317963, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -2766,10 +2762,6 @@ PrefabInstance:
       propertyPath: bossHpUI
       value: 
       objectReference: {fileID: 802354313}
-    - target: {fileID: 8423039338927317966, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
-      propertyPath: maxBossHP
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 8423039338927317966, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
@@ -3070,30 +3062,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -2340587333429806397, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
-      propertyPath: m_SlopeLimit
-      value: 45
-      objectReference: {fileID: 0}
     - target: {fileID: 1201882768, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
       propertyPath: bF
       value: 
       objectReference: {fileID: 1967456101}
-    - target: {fileID: 1201882768, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
-      propertyPath: playerMaxHP
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 1201882768, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
-      propertyPath: playerMaxMP
-      value: 200
-      objectReference: {fileID: 0}
     - target: {fileID: 328035929963748865, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
       propertyPath: gm
       value: 
       objectReference: {fileID: 498011346}
-    - target: {fileID: 4082872709735001133, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
-      propertyPath: bulletDelay
-      value: 0.75
-      objectReference: {fileID: 0}
     - target: {fileID: 4623847553639675663, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
       propertyPath: bF
       value: 
