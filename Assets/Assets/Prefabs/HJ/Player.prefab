@@ -525,7 +525,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  BossTracer: {fileID: 5938176985966184918, guid: 25fd5f99b91066f44aac1e238a1a8a22, type: 3}
   check: 0
   nearObject: {fileID: 0}
   Items: []
@@ -594,6 +593,7 @@ MonoBehaviour:
 <<<<<<< HEAD
 <<<<<<< HEAD
   bulletDelay: 0.75
+<<<<<<< HEAD
 =======
   bulletDelay: 0.5
 <<<<<<< HEAD
@@ -614,7 +614,12 @@ MonoBehaviour:
 =======
   bulletDelay: 0.75
 >>>>>>> parent of 5c03c1e (HJ.Revert)
+=======
+  burstDelay: 0
+  burstMinDelay: 0.05
+>>>>>>> parent of a36ec35 (0718 _JY)
   sup: {fileID: 5379628270244559890}
+  particle1: {fileID: 1876081050882714, guid: e5df5caad603c8349ba3481b8ded0927, type: 3}
 --- !u!54 &1223138222
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -762,10 +767,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7134550588212779058}
     - target: {fileID: 1904772500208245378, guid: ec7acb646187a0942b95466806fc30c6, type: 3}
-      propertyPath: rate
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1904772500208245378, guid: ec7acb646187a0942b95466806fc30c6, type: 3}
       propertyPath: meleeArea
       value: 
       objectReference: {fileID: 1633591123017362056}
@@ -875,7 +876,7 @@ PrefabInstance:
       objectReference: {fileID: 4601953353689711024}
     - target: {fileID: 7320958072939080765, guid: ec7acb646187a0942b95466806fc30c6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9014409038438785240, guid: ec7acb646187a0942b95466806fc30c6, type: 3}
       propertyPath: m_RootOrder

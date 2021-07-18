@@ -17,17 +17,16 @@ public class Melee : MonoBehaviour
     public enum Type { Melee, Range };
     public Type type;
     int damage;
+    float rate;
 
-    public PlayerState ps;
     
     public BoxCollider meleeArea;
     public TrailRenderer trailEffect;
     bool fDown;
     bool fDown2;
-    public bool isFireReady;
-    public float fireDelay;
+    bool isFireReady;
+    float fireDelay;
     GameObject equipWeapon;
-    public float rate;
     public GameObject pos;
 
     public Animator anim;
@@ -35,7 +34,6 @@ public class Melee : MonoBehaviour
     void start()
     {
         anim = GetComponentInChildren<Animator>();
-      
     }
 
     public void GetInput()
@@ -45,6 +43,60 @@ public class Melee : MonoBehaviour
 
 
     }
+    public void Attack()
+    {
+        //if (equipWeapon == null)
+        //    return;
+
+        //fireDelay += Time.deltaTime;
+        //isFireReady = rate < fireDelay;
+
+        if (fDown)
+        {
+
+
+            //use();
+            anim.SetTrigger("doSwing");
+            // fireDelay = 0;
+
+            Instantiate(go);
+            attackAnchor = pos.transform.position;
+            go.transform.position = attackAnchor;
+            go.Play();
+
+            use();
+
+        }
+    }
+
+    public void use()
+    {
+        StopCoroutine(Shoot());
+        StartCoroutine(Shoot());
+
+        //if (type == Type.Melee)
+        //{
+        IEnumerator Shoot()
+        {
+            //1
+            yield return new WaitForSeconds(0.1f); //0.1 프레임 대기
+            meleeArea.enabled = true;
+            trailEffect.enabled = true;
+            //2
+            yield return new WaitForSeconds(0.5f); //0.5 프레임 대기
+            meleeArea.enabled = false;
+
+            yield return new WaitForSeconds(0.6f); //0.6 프레임 대기
+            trailEffect.enabled = false;
+
+        }
+
+
+
+
+
+    }
+
 
     void Update()
     {
@@ -52,13 +104,6 @@ public class Melee : MonoBehaviour
         Attack();
 
 
-        fireDelay += Time.deltaTime;
-        if (rate < fireDelay)
-        {
-            isFireReady = true;
-
-            fireDelay = 0;
-        };
         // 만약 마우스 왼족 버튼을 누르면
         if (fDown2 && fDown)
         {
@@ -85,61 +130,9 @@ public class Melee : MonoBehaviour
             }
         }
 
-        if (fDown && isFireReady == true && PlayerState.stunCheck != true )
-        {
 
-
-
-            anim.SetTrigger("doSwing");
-            fireDelay = 0;
-
-            Instantiate(go);
-            attackAnchor = pos.transform.position;
-            go.transform.position = attackAnchor;
-            go.Play();
-
-            use();
-            isFireReady = false;
-        }
 
 
     }
-
-    public void Attack()
-    {
-        if (equipWeapon == null)
-        { return; }
-    }
-
-    public void use()
-    {
-        StopCoroutine(Shoot());
-        StartCoroutine(Shoot());
-
-        //if (type == Type.Melee)
-        //{
-        IEnumerator Shoot()
-        {
-            isFireReady = false;
-            //1
-            yield return new WaitForSeconds(0.1f); //0.1 프레임 대기
-            meleeArea.enabled = true;
-            trailEffect.enabled = true;
-            //2
-            yield return new WaitForSeconds(0.5f); //0.5 프레임 대기
-            meleeArea.enabled = false;
-
-            yield return new WaitForSeconds(0.6f); //0.6 프레임 대기
-            trailEffect.enabled = false;
-
-            yield return new WaitForSeconds(3f);
-            
-        }
-
-
-    }
-
-   
-    
 
 }

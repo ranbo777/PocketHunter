@@ -33,8 +33,7 @@ public class MeleeAttack : MonoBehaviour
         //  탄환에 맞은 오브젝트가 보스일 경우 보스에게 데미지를 입힌다.
         if (col.tag.Equals("Boss"))
         {
-
-            bF.TakeMeleeDamage(pf.attackValue, pf.groggyValue);
+            bF.TakeMeleeDamage(pf.attackValue);
 
         }
 

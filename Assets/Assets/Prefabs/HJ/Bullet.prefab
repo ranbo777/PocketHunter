@@ -112,6 +112,7 @@ MonoBehaviour:
   bulletSpeed: 170
   bF: {fileID: 0}
   existTime: 3
+  particle1: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
 --- !u!54 &-6242279500356935715
 Rigidbody:
   m_ObjectHideFlags: 0
