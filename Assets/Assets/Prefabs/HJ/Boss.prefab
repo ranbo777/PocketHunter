@@ -1317,8 +1317,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  speed: 3
+  bossExitSpeed: 3
   BossRest: 1
+  Traces:
+  - {fileID: 4029805550222813907, guid: abc5e0c5ca77d20409faa174c4bacbbc, type: 3}
+  - {fileID: 1779279386326655046, guid: 1319ea7b486a1cb42a8f3cf7056555ed, type: 3}
+  - {fileID: 624358934663148520, guid: 08972897f20a4b747a5790e0f02ecc40, type: 3}
+  - {fileID: 7740187181606489903, guid: d3ad18209c214bc4ea5a0c8e32ca58fa, type: 3}
+  - {fileID: 3574412973235742111, guid: e7b21bff376e86645881eb84bcbd14b5, type: 3}
+  BossSteps: 0
+  TraceDensity: 0
   BossItem: {fileID: 8782627306703031216, guid: 4b1d008a0f0a0a64d8fabc0fb6471538, type: 3}
   bossHpUI: {fileID: 0}
   bossState: 0

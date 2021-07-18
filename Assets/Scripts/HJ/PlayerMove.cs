@@ -13,6 +13,7 @@ public class PlayerMove : MonoBehaviour
     PlayerState ps;
 
     GameManger gm;
+    public GameObject BossTracer;
     float temp;
     float time = 0;
 
@@ -184,6 +185,9 @@ public class PlayerMove : MonoBehaviour
                     hasTrace[TraceIndex] = true;
 
                     Destroy(nearObject);
+                    Vector3 dir = new Vector3(1, 1, 0);
+                    BossTracer.transform.position = transform.position + dir;
+                    Instantiate(BossTracer);
 
                 }
 
