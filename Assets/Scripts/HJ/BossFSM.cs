@@ -56,9 +56,6 @@ public class BossFSM : MonoBehaviour
     float p3MoveTime = 0;
     #endregion
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 
     #region º¸½º ÆÐÆ®·Ñ º¯¼ö
 
@@ -88,12 +85,6 @@ public class BossFSM : MonoBehaviour
     #endregion
 
     int AwakeCounter = 0;
-=======
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
-=======
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
-=======
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
     float distance;
 
     float time2 = 0;
@@ -115,17 +106,8 @@ public class BossFSM : MonoBehaviour
         Awake,
         Idle,
         Move,
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         Patrol,
         Nap,
-=======
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
-=======
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
-=======
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
         Groggy,
         Pattern_1,
         Pattern_2,
@@ -143,7 +125,12 @@ public class BossFSM : MonoBehaviour
         bossState = State.Idle;
 
         cc = gameObject.GetComponent<CharacterController>();
-        
+        BossRest = true;
+
+        //ÆÐÆ®·Ñ
+        waypointIndex = 0;
+        LookPatrolTarget();
+
     }
 
     void Update()
@@ -160,9 +147,6 @@ public class BossFSM : MonoBehaviour
 
         time += Time.deltaTime;
         time2 += Time.deltaTime;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         BossHPCheck();
 
 
@@ -171,12 +155,6 @@ public class BossFSM : MonoBehaviour
 
             bossState = State.Move;
         }
-=======
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
-=======
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
-=======
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
 
         //if (distance <= bossAttackDistance && bossState != State.Attack)
         //{
@@ -214,15 +192,14 @@ public class BossFSM : MonoBehaviour
                 move = Vector3.zero;
                 am.SetFloat("Runspeed", move.magnitude);
 
-                if (distance <= 2.0f)
+
+                if (BossRest != false)
                 {
-                    p2Check = true;
-                    bossState = State.Pattern_2;
-                    print("ÆÐÅÏ2 ½ÇÇà");
+                    bossState = State.Patrol;
+                    print("º¸½º Á¤Âû ½ÇÇà");
+                    am.SetFloat("Runspeed", move.magnitude);
+                    return;
                 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                 else
                 {
 
@@ -236,8 +213,8 @@ public class BossFSM : MonoBehaviour
                             print("ÆÐÅÏ2 ½ÇÇà");
                         }
 
-<<<<<<< HEAD
                         if (distance > 2.0f && distance <= 8.0f)
+<<<<<<< HEAD
 =======
                     if (distance > 8.0f)
                     {
@@ -248,6 +225,8 @@ public class BossFSM : MonoBehaviour
 >>>>>>> parent of c35e3a0 (ê¸°íƒ€ ìˆ˜ì •)
 =======
 >>>>>>> parent of c35e3a0 (ê¸°íƒ€ ìˆ˜ì •)
+=======
+>>>>>>> parent of 5c03c1e (HJ.Revert)
                         {
                             int p = Random.Range(0, 100);
                             if (p >= 90)
@@ -278,105 +257,9 @@ public class BossFSM : MonoBehaviour
                             }
 
                         }
-=======
-
-                if (distance > 2.0f && distance <= 8.0f)
-                {
-                    int p = Random.Range(0, 100);
-                    if (p >= 90)
-                    {
-                        p1Check = true;
-                        bossState = State.Pattern_1;
-                        print("ÆÐÅÏ1 ½ÇÇà");
-                    }
-                    else { bossState = State.Move; }
-                }
-=======
-
-                if (distance > 2.0f && distance <= 8.0f)
-                {
-                    int p = Random.Range(0, 100);
-                    if (p >= 90)
-                    {
-                        p1Check = true;
-                        bossState = State.Pattern_1;
-                        print("ÆÐÅÏ1 ½ÇÇà");
-                    }
-                    else { bossState = State.Move; }
-                }
-=======
-
-                if (distance > 2.0f && distance <= 8.0f)
-                {
-                    int p = Random.Range(0, 100);
-                    if (p >= 90)
-                    {
-                        p1Check = true;
-                        bossState = State.Pattern_1;
-                        print("ÆÐÅÏ1 ½ÇÇà");
-                    }
-                    else { bossState = State.Move; }
-                }
-
-                if (distance > 8.0f)
-                {
-                    int p = Random.Range(0, 100);
-
-                    if (p <= 20)
-                    {
-                        p1Check = true;
-                        bossState = State.Pattern_1;
-                        print("ÆÐÅÏ1 ½ÇÇà");
-                    }
-                    else 
-                    {
-                        p3Check = true;
-                        p3MoveTime = 0;
-                        bossState = State.Pattern_3;
-                        print("ÆÐÅÏ3 ½ÇÇà");
-                    }
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
-
-                if (distance > 8.0f)
-                {
-                    int p = Random.Range(0, 100);
-
-                    if (p <= 20)
-                    {
-                        p1Check = true;
-                        bossState = State.Pattern_1;
-                        print("ÆÐÅÏ1 ½ÇÇà");
-                    }
-                    else 
-                    {
-                        p3Check = true;
-                        p3MoveTime = 0;
-                        bossState = State.Pattern_3;
-                        print("ÆÐÅÏ3 ½ÇÇà");
-                    }
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
-
-                if (distance > 8.0f)
-                {
-                    int p = Random.Range(0, 100);
-
-                    if (p <= 20)
-                    {
-                        p1Check = true;
-                        bossState = State.Pattern_1;
-                        print("ÆÐÅÏ1 ½ÇÇà");
-                    }
-                    else 
-                    {
-                        p3Check = true;
-                        p3MoveTime = 0;
-                        bossState = State.Pattern_3;
-                        print("ÆÐÅÏ3 ½ÇÇà");
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
                     }
 
                 }
-
                 //if (Input.GetKeyDown(KeyCode.O))
                 //{
                 //    p1Check = true;
@@ -392,19 +275,9 @@ public class BossFSM : MonoBehaviour
                 break;
             case State.Move:
                 LookTarget();
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                 BossRest = false;
                 print("³ÊÀÌ¸®¿Í");
                 move = new Vector3(target.transform.position.x - transform.position.x, 0,
-=======
-=======
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
-=======
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
-                move = new Vector3(target.transform.position.x - transform.position.x, 0, 
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
                     target.transform.position.z - transform.position.z);
                 move.Normalize();
                 am.SetFloat("Runspeed", move.magnitude);
@@ -458,9 +331,6 @@ public class BossFSM : MonoBehaviour
             case State.Dead:
                 OnDestroyBoss();
                 break;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 
             case State.Patrol:
                 // ÆÐÆ®·Ñ
@@ -493,13 +363,6 @@ public class BossFSM : MonoBehaviour
                 BossAwake();
                 break;
         }
-=======
-=======
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
-=======
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
-        }        
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
         //  º¸½º hp°¡ 0 ¹ØÀ¸·Î ³»·Á°¡Áö ¾Ê°Ô ¼³Á¤.
         HP = Mathf.Max(0, HP);
     }
@@ -554,8 +417,6 @@ public class BossFSM : MonoBehaviour
         bossState = State.Idle;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
  
     void LookTarget()
     {
@@ -563,10 +424,13 @@ public class BossFSM : MonoBehaviour
         
     }
 
-=======
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
-=======
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
+    void LookPatrolTarget()
+    {
+        
+        transform.LookAt(waypoints[waypointIndex].position);
+
+    }
+
     //  ÆÐÅÏ1: º¸½º°¡ count ¸¸Å­ÀÇ Åõ»çÃ¼¸¦ »ý¼ºÇØ Àû¿¡°Ô ¹ß»ç.
     IEnumerator Pattern_1(int count)
     {
@@ -632,9 +496,6 @@ public class BossFSM : MonoBehaviour
     {
         bossHpUI.SetActive(false);
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 
     void Patrol() // Á¤Âû
@@ -734,10 +595,4 @@ public class BossFSM : MonoBehaviour
    
 
 
-=======
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
-=======
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
-=======
->>>>>>> parent of bd445c9 (ìˆ˜ì •)
 }

@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 612584631}
   m_LocalRotation: {x: -0.030503279, y: -0.030503165, z: 0.70644987, w: 0.70644724}
-  m_LocalPosition: {x: 0.36207137, y: 0, z: 0.024627674}
+  m_LocalPosition: {x: 0.36207137, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8423039339496341705}
@@ -70,7 +70,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1025892013}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4, y: -0, z: -0}
+  m_LocalPosition: {x: -0.5, y: -0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8423039338341079905}
@@ -235,7 +235,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.2, z: 0.2}
+  m_Size: {x: 0.3, y: 0.2, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1100764544
 Rigidbody:
@@ -278,7 +278,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1947743226}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4, y: 0, z: 0}
+  m_LocalPosition: {x: -0.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8423039339602278468}
@@ -443,7 +443,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.2, z: 0.2}
+  m_Size: {x: 0.3, y: 0.2, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2047918409
 Rigidbody:
@@ -1500,17 +1500,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0, z: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
   bossSpeed: 4
 =======
   bossSpeed: 3
 >>>>>>> parent of c35e3a0 (기타 수정)
   maxBossHP: 150
+=======
+  bossSpeed: 5
+  maxBossHP: 100
+>>>>>>> parent of 5c03c1e (HJ.Revert)
   p1Bullet: {fileID: 6825090248882206603, guid: 770e4a588e6eac24f9a58b48bf59ecc9, type: 3}
   p2AttackValue: 10
   p2ColType: 0
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
   waypoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -1528,15 +1530,6 @@ MonoBehaviour:
   BossSteps: 0
   TraceDensity: 0
   BossItem: {fileID: 8782627306703031216, guid: 4b1d008a0f0a0a64d8fabc0fb6471538, type: 3}
-=======
-  BossItem: {fileID: 0}
->>>>>>> parent of bd445c9 (수정)
-=======
-  BossItem: {fileID: 0}
->>>>>>> parent of bd445c9 (수정)
-=======
-  BossItem: {fileID: 0}
->>>>>>> parent of bd445c9 (수정)
   bossHpUI: {fileID: 0}
   bossState: 0
 --- !u!143 &292568768
@@ -1552,7 +1545,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 0.3
   m_Radius: 0.03
-  m_SlopeLimit: 40
+  m_SlopeLimit: 50
   m_StepOffset: 0.3
   m_SkinWidth: 0.01
   m_MinMoveDistance: 0.001

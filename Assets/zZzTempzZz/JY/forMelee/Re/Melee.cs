@@ -17,25 +17,10 @@ public class Melee : MonoBehaviour
     public enum Type { Melee, Range };
     public Type type;
     int damage;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 
     public PlayerState ps;
     
     public BoxCollider meleeArea;
-=======
-    float rate;
-    public SphereCollider meleeArea;
->>>>>>> parent of bd445c9 (ÏàòÏ†ï)
-=======
-    float rate;
-    public SphereCollider meleeArea;
->>>>>>> parent of bd445c9 (ÏàòÏ†ï)
-=======
-    float rate;
-    public SphereCollider meleeArea;
->>>>>>> parent of bd445c9 (ÏàòÏ†ï)
     public TrailRenderer trailEffect;
     bool fDown;
     bool fDown2;
@@ -137,14 +122,14 @@ public class Melee : MonoBehaviour
         {
             isFireReady = false;
             //1
-            yield return new WaitForSeconds(0.1f); //1 «¡∑π¿” ¥Î±‚
+            yield return new WaitForSeconds(0.1f); //0.1 «¡∑π¿” ¥Î±‚
             meleeArea.enabled = true;
             trailEffect.enabled = true;
             //2
-            yield return new WaitForSeconds(0.5f); //1 «¡∑π¿” ¥Î±‚
+            yield return new WaitForSeconds(0.5f); //0.5 «¡∑π¿” ¥Î±‚
             meleeArea.enabled = false;
 
-            yield return new WaitForSeconds(0.6f); //1 «¡∑π¿” ¥Î±‚
+            yield return new WaitForSeconds(0.6f); //0.6 «¡∑π¿” ¥Î±‚
             trailEffect.enabled = false;
 
             yield return new WaitForSeconds(3f);
