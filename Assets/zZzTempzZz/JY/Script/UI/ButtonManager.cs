@@ -20,6 +20,11 @@ public class ButtonManager : MonoBehaviour
     public void OnClickOption()
     { }
 
+    public void OnClickMenu()
+    { SceneManager.LoadScene("MenuScene"); 
+    
+    }
+
 
 
     public void QuitGame()
