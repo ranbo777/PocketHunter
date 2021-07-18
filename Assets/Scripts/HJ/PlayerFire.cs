@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerFire : MonoBehaviour
 {
@@ -11,10 +12,13 @@ public class PlayerFire : MonoBehaviour
 
     float burstDelay;
     public float burstMinDelay = 0.05f;
+    public int burstBulletAmount = 20;
+    public Text burstBulletInfo;
+    int burstTemp;
     public GameObject sup;
     GameManger gm;
 
-    public GameObject particle1;
+    public GameObject particle1;   
     GameObject pc1;
 
 
@@ -28,6 +32,12 @@ public class PlayerFire : MonoBehaviour
 
     void Start()
     {
+        if(burstBulletInfo == null)
+        {
+           burstBulletInfo = GameObject.Find("Canvas").transform.Find("Game Panel").Find("BurstBulletInfo").GetComponent<Text>();
+        }
+        burstBulletInfo.gameObject.SetActive(false);
+
         pc1 = Instantiate(particle1, transform.position, Quaternion.identity);
         pc1.SetActive(false);
     }
@@ -64,6 +74,15 @@ public class PlayerFire : MonoBehaviour
                 time = 0;
                 burstDelay -= 0.1f;
                 burstDelay = Mathf.Max(burstMinDelay, burstDelay);
+                burstTemp--;
+                burstBulletInfo.text = burstTemp + " / " + burstBulletAmount;
+                if (burstTemp <= 0)
+                {
+                    burstModeSubCheck = false;
+                    PlayerState.playerZoomCheck = false;
+                    burstBulletInfo.gameObject.SetActive(false);
+                    print("ÃÑ¾Ë ´Ù¾¸");
+                }
             }
 
         }
@@ -80,10 +99,12 @@ public class PlayerFire : MonoBehaviour
             burstModeSubCheck = true;
             pc1.transform.position = transform.position;
             pc1.SetActive(true);
+            burstTemp = burstBulletAmount;
         }
 
         if (burstModeSubCheck == false)
         {
+            burstBulletInfo.gameObject.SetActive(false);
             burstModeCheck = false;
             pc1.SetActive(false);
         }
@@ -91,6 +112,8 @@ public class PlayerFire : MonoBehaviour
 
     void BurstMode()
     {
+        burstBulletInfo.text = burstTemp + " / " + burstBulletAmount;
+        burstBulletInfo.gameObject.SetActive(true);
         burstModeCheck = true;
         PlayerState.playerZoomCheck = true;
         burstDelay = bulletDelay;
