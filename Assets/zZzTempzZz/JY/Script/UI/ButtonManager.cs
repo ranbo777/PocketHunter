@@ -9,12 +9,12 @@ public class ButtonManager : MonoBehaviour
     static string nextScene;
     public void OnClickNewGame()
     {
-        SceneManager.LoadScene("PlayScene");
+        SceneManager.LoadScene("LoadingScene");
     }
     public void OnClickLoad(string sceneName)
     {
         nextScene = sceneName;
-        SceneManager.LoadScene("LoadingScene");
+        SceneManager.LoadScene("PlayScene");
 
     }
     public void OnClickOption()
