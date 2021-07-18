@@ -2652,6 +2652,7 @@ PrefabInstance:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     - target: {fileID: 3876764646736189847, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
       propertyPath: m_Name
       value: Tail
@@ -2690,6 +2691,11 @@ PrefabInstance:
 >>>>>>> parent of bd445c9 (수정)
 =======
 >>>>>>> parent of bd445c9 (수정)
+=======
+    - target: {fileID: 292568768, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
+      propertyPath: m_SlopeLimit
+      value: 60
+>>>>>>> parent of a29f601 (Merge branch 'main' of https://github.com/ranbo777/PocketHunter into main)
       objectReference: {fileID: 0}
     - target: {fileID: 8423039338927317963, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
       propertyPath: m_RootOrder
@@ -2766,6 +2772,10 @@ PrefabInstance:
       propertyPath: bossHpUI
       value: 
       objectReference: {fileID: 802354313}
+    - target: {fileID: 8423039338927317966, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
+      propertyPath: maxBossHP
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 8423039338927317966, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
       propertyPath: waypoints.Array.data[0]
 =======
@@ -3078,10 +3088,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2340587333429806397, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
+      propertyPath: m_SlopeLimit
+      value: 45
+      objectReference: {fileID: 0}
     - target: {fileID: 1201882768, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
       propertyPath: bF
       value: 
       objectReference: {fileID: 1967456101}
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -3101,10 +3116,21 @@ PrefabInstance:
 >>>>>>> parent of bd445c9 (수정)
 =======
 >>>>>>> parent of bd445c9 (수정)
+=======
+    - target: {fileID: 1201882768, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
+      propertyPath: playerMaxHP
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1201882768, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
+      propertyPath: playerMaxMP
+      value: 200
+      objectReference: {fileID: 0}
+>>>>>>> parent of a29f601 (Merge branch 'main' of https://github.com/ranbo777/PocketHunter into main)
     - target: {fileID: 328035929963748865, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
       propertyPath: gm
       value: 
       objectReference: {fileID: 498011346}
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -3126,6 +3152,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
 >>>>>>> parent of bd445c9 (수정)
+=======
+    - target: {fileID: 4082872709735001133, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
+      propertyPath: bulletDelay
+      value: 0.75
+      objectReference: {fileID: 0}
+>>>>>>> parent of a29f601 (Merge branch 'main' of https://github.com/ranbo777/PocketHunter into main)
     - target: {fileID: 4623847553639675663, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
       propertyPath: bF
       value: 
