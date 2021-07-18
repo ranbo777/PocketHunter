@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Level(Scenes)/JYScene/BuildScene_JY.unity
-    guid: 9f0c356cbab091a438b64c9a6f03df2e
+    path: Assets/Level(Scenes)/MenuScene.unity
+    guid: f5e64075195dd894ab78f148bfcc31d7
+  - enabled: 1
+    path: Assets/Level(Scenes)/HYScene/PlayScene.unity
+    guid: 017b575e5b915564680553a4df00cc24
+  - enabled: 1
+    path: Assets/Level(Scenes)/LoadingScene.unity
+    guid: 33530b066e7fe9d42957b8b0da5712c3
   m_configObjects: {}
