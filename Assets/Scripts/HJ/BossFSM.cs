@@ -62,11 +62,25 @@ public class BossFSM : MonoBehaviour
     //보스 패트롤 변수
     float recoveryTime = 0;
     public Transform[] waypoints;
-    public int speed;
+    public float bossExitSpeed = 3.0f;
 
     private int waypointIndex;
     private float dist;
     public bool BossRest;
+
+    #endregion
+
+
+    #region 보스 흔적 드랍 변수
+
+
+    public GameObject[] Traces;
+    private int TracesIndex;
+    public int BossSteps;
+    public int TraceDensity; //흔적농도
+    float TraceLifeTime;
+    float TraceBirthTime =0;
+
 
     #endregion
 
@@ -119,6 +133,7 @@ public class BossFSM : MonoBehaviour
     void Update()
     {
 
+
         yVelocity += gravity * Time.deltaTime;
 
         //cc.Move(new Vector3(0, yVelocity, 0));
@@ -132,6 +147,11 @@ public class BossFSM : MonoBehaviour
         BossHPCheck();
 
 
+        if(Input.GetKey(KeyCode.P))
+        {
+
+            bossState = State.Move;
+        }
 
         //if (distance <= bossAttackDistance && bossState != State.Attack)
         //{
@@ -206,7 +226,7 @@ public class BossFSM : MonoBehaviour
                     {
                         int p = Random.Range(0, 100);
 
-                        if (p <= 50)
+                        if (p <= 20)
                         {
                             p1Check = true;
                             bossState = State.Pattern_1;
@@ -305,6 +325,7 @@ public class BossFSM : MonoBehaviour
                 Transform BPoint = gameObject.transform;
                 move = RPoint.position - BPoint.position;
                 move.Normalize();
+                TraceDrop();
                 dist = Vector3.Distance(BPoint.position, RPoint.position);
                 BossRecover();
                 if (dist < 5f)
@@ -411,15 +432,15 @@ public class BossFSM : MonoBehaviour
     }
 
 
-    void Patrol()
+    void Patrol() // 정찰
     {
         //print("움직임");
-        cc.Move(move * bossSpeed * Time.deltaTime);
+        cc.Move(move * bossExitSpeed * Time.deltaTime);
         am.SetFloat("Runspeed", move.magnitude);
 
     }
 
-    void IncreaseIndex()
+    void IncreaseIndex() // 정찰 루트 배열
     {
         waypointIndex++;
         if (waypointIndex >= waypoints.Length)
@@ -430,7 +451,9 @@ public class BossFSM : MonoBehaviour
         transform.LookAt(waypoints[waypointIndex].position);
     }
 
-    void BossHPCheck()
+    
+
+    void BossHPCheck() // 보스 체력 체크
     {
         if (80 < HP && HP < 150)
         {
@@ -445,7 +468,7 @@ public class BossFSM : MonoBehaviour
 
     }
 
-    void BossRecover()
+    void BossRecover() // 보스 도주시 체력 회복
     {
         recoveryTime += Time.deltaTime;
         if (recoveryTime >= 3.0f && HP < 100.0f)
@@ -455,4 +478,38 @@ public class BossFSM : MonoBehaviour
         }
 
     }
+
+    void TraceDrop() // 흔적 드랍 카운터
+    {
+        TraceBirthTime += Time.deltaTime;
+
+        print(TraceBirthTime);
+        if (TraceBirthTime >= 5.0f) 
+        {
+            GameObject Poo = Traces[TracesIndex];
+            Vector3 dir = new Vector3(0, 2, -2); 
+            Poo.transform.position = transform.position + dir;
+            Instantiate(Poo);
+            TraceIndexNext();
+
+            TraceBirthTime = 0;
+        }
+        
+    }
+
+
+    void TraceIndexNext() // 흔적 배열
+    {
+        TracesIndex++;
+        if (TracesIndex >= Traces.Length)
+        {
+
+            TracesIndex = 0;
+        }
+       
+    }
+
+   
+
+
 }

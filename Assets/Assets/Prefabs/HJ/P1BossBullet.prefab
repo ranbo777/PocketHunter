@@ -111,7 +111,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.75
   trail: {fileID: 9063449699058260602}
-  paticle1: {fileID: 100014, guid: efd5151f00f299441bfa06b5b355cae5, type: 3}
 --- !u!1 &9063449699058260602
 GameObject:
   m_ObjectHideFlags: 0
