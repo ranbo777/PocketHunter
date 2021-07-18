@@ -221,7 +221,7 @@ public class BossFSM : MonoBehaviour
                     {
                         int p = Random.Range(0, 100);
 
-                        if (p <= 50)
+                        if (p <= 60)
                         {
                             p1Check = true;
                             bossState = State.Pattern_1;
@@ -334,6 +334,7 @@ public class BossFSM : MonoBehaviour
                 Patrol();
                 break;
             case State.Nap:
+                print("Nap");
                 BossNap();
                 break;
             case State.Awake:
