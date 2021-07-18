@@ -167,7 +167,7 @@ public class BossFSM : MonoBehaviour
         //    bossState = State.Idle;
         //}
 
-        if (bossGroggyValue >= 10.0f && bossState != State.Pattern_3)
+        if (bossGroggyValue >= 15.0f && bossState != State.Pattern_3)
         {
             bossState = State.Groggy;
             am.SetBool("OnGroggy", true);
@@ -333,10 +333,13 @@ public class BossFSM : MonoBehaviour
                 BossRecover2();
                 TraceDrop();
                 dist = Vector3.Distance(BPoint.position, RPoint.position);
-                if (dist < 3f)
+                if (dist < 5f)
                 {
                     IncreaseIndex();
-                    bossState = State.Nap;
+                    if (HP < 80)
+                    {
+                        bossState = State.Nap;
+                    }
                 }
                 Patrol();
                 break;
@@ -499,7 +502,7 @@ public class BossFSM : MonoBehaviour
 
     void BossHPCheck() // 보스 체력 체크
     {
-        if (30 < HP && HP < 150)
+        if (50 < HP && HP < 150)
         {
             BossRest = false;
 
