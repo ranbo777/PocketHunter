@@ -244,6 +244,9 @@ public class BossFSM : MonoBehaviour
                         int p = Random.Range(0, 100);
 
                         if (p <= 20)
+<<<<<<< HEAD
+>>>>>>> parent of c35e3a0 (기타 수정)
+=======
 >>>>>>> parent of c35e3a0 (기타 수정)
                         {
                             int p = Random.Range(0, 100);

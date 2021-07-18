@@ -568,6 +568,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMaxHP: 500
+<<<<<<< HEAD
+=======
+  playerMaxMP: 100
+>>>>>>> parent of c35e3a0 (기타 수정)
   bF: {fileID: 0}
 --- !u!114 &4082872709735001133
 MonoBehaviour:
@@ -585,12 +589,16 @@ MonoBehaviour:
   groggyValue: 1
   attackValue: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
   bulletDelay: 0.75
 =======
   bulletDelay: 0.5
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+  bulletDelay: 0.5
+>>>>>>> parent of c35e3a0 (기타 수정)
   burstDelay: 0
   burstMinDelay: 0.05
 >>>>>>> parent of c35e3a0 (기타 수정)
