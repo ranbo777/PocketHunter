@@ -569,6 +569,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMaxHP: 500
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  playerMaxMP: 100
+>>>>>>> parent of c35e3a0 (기타 수정)
 =======
   playerMaxMP: 100
 >>>>>>> parent of c35e3a0 (기타 수정)
@@ -590,12 +594,16 @@ MonoBehaviour:
   attackValue: 2
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   bulletDelay: 0.75
 =======
   bulletDelay: 0.5
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+  bulletDelay: 0.5
+>>>>>>> parent of c35e3a0 (기타 수정)
 =======
   bulletDelay: 0.5
 >>>>>>> parent of c35e3a0 (기타 수정)

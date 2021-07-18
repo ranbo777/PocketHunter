@@ -245,6 +245,9 @@ public class BossFSM : MonoBehaviour
 
                         if (p <= 20)
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of c35e3a0 (기타 수정)
+=======
 >>>>>>> parent of c35e3a0 (기타 수정)
 =======
 >>>>>>> parent of c35e3a0 (기타 수정)
