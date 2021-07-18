@@ -360,6 +360,16 @@ public class BossFSM : MonoBehaviour
         HP -= playerAttackValue;
         bossGroggyValue += playerGroggyValue;
     }
+    public void TakeMeleeDamage(float playerAttackValue, float playerGroggyValue)
+    {
+        HP -= playerAttackValue;
+        bossGroggyValue += playerGroggyValue;
+    }
+
+    //public void TakeMeleeDamage(float x)
+    //{
+    //    HP -= x;
+    //}
 
 
     public void BossNap()
@@ -394,11 +404,7 @@ public class BossFSM : MonoBehaviour
         bossState = State.Idle;
     }
 
-    public void TakeMeleeDamage(float x)
-    {
-        HP -= x;
-    }
-
+ 
     void LookTarget()
     {
         transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
