@@ -11,27 +11,22 @@ public class P1BulletMove : MonoBehaviour
     Vector3 handle2;
     Vector3 sPos;
     Vector3 tPos;
-    public GameObject paticle1;
-    GameObject pc1;
 
     PlayerState pS;
-
 
     private void Start()
     {
         pS = GameObject.Find("Player").GetComponent<PlayerState>();
-        pc1 = Instantiate(paticle1);
-        pc1.SetActive(false);
-
+        
     }
 
     void Update()
     {
         time += Time.deltaTime;
 
-        if (time >= 0.01f) { trail.SetActive(true); }
-
-        if (time >= 3.0f) { Destroy(gameObject); }
+        if(time >= 0.01f) { trail.SetActive(true); }
+        
+        if(time >= 3.0f) { Destroy(gameObject); }
     }
     private void FixedUpdate()
     {
@@ -63,16 +58,13 @@ public class P1BulletMove : MonoBehaviour
     {
         if (other.gameObject.tag.Equals("Player"))
         {
-            if (PlayerState.noHitCheck == false)
+            if(PlayerState.noHitCheck == false)
             {
                 print("¸Â¾Ò´Ù!");
-                pc1.transform.position = transform.position;
-                pc1.SetActive(true);
                 pS.AddPlayerHP(-15.0f);
                 pS.AddStunGauge(1.0f);
                 Destroy(gameObject);
-                Destroy(pc1, 0.5f);
-            }
+            }            
         }
     }
 
@@ -81,7 +73,6 @@ public class P1BulletMove : MonoBehaviour
         if (other.gameObject.tag.Equals("Ground"))
         {
             Destroy(gameObject);
-            Destroy(pc1);
         }
     }
 }
