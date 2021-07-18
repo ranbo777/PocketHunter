@@ -2714,26 +2714,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 612584632, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 612584632, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 612584632, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 612584632, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 612584635, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8423039338927317963, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -2779,25 +2759,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8423039338927317966, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
-      propertyPath: speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8423039338927317966, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
-      propertyPath: BossItem
-      value: 
-      objectReference: {fileID: 8782627306703031216, guid: 4b1d008a0f0a0a64d8fabc0fb6471538, type: 3}
-    - target: {fileID: 8423039338927317966, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
       propertyPath: bossHpUI
       value: 
       objectReference: {fileID: 802354313}
-    - target: {fileID: 8423039338927317966, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
-      propertyPath: bossSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8423039338927317966, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
-      propertyPath: waypoints.Array.size
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 8423039338927317966, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
@@ -2818,9 +2782,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 612584635, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
-    - {fileID: 612584634, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
 --- !u!4 &783969720 stripped
 Transform:

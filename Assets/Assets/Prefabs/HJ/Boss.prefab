@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 612584631}
   m_LocalRotation: {x: -0.030503279, y: -0.030503165, z: 0.70644987, w: 0.70644724}
-  m_LocalPosition: {x: 0.36207137, y: 0, z: 0.024627674}
+  m_LocalPosition: {x: 0.36207137, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8423039339496341705}
@@ -1307,12 +1307,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0, z: 0}
-  bossSpeed: 4
+  bossSpeed: 3
   maxBossHP: 150
   p1Bullet: {fileID: 6825090248882206603, guid: 770e4a588e6eac24f9a58b48bf59ecc9, type: 3}
   p2AttackValue: 10
   p2ColType: 0
-  BossItem: {fileID: 0}
+  waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  speed: 3
+  BossRest: 1
+  BossItem: {fileID: 8782627306703031216, guid: 4b1d008a0f0a0a64d8fabc0fb6471538, type: 3}
   bossHpUI: {fileID: 0}
   bossState: 0
 --- !u!143 &292568768
