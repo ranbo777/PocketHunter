@@ -87,6 +87,7 @@ public class PlayerEquip : MonoBehaviour
             {
                 equipWeapon.SetActive(false);
             }
+            print(weaponIndex);
             equipWeapon = weapons[weaponIndex];
 
             equipWeapon.SetActive(true);
