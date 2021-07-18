@@ -56,6 +56,20 @@ public class BossFSM : MonoBehaviour
     float p3MoveTime = 0;
     #endregion
 
+
+    #region 보스 패트롤 변수
+
+    //보스 패트롤 변수
+    float recoveryTime = 0;
+    public Transform[] waypoints;
+    public int speed;
+
+    private int waypointIndex;
+    private float dist;
+    public bool BossRest;
+
+    #endregion
+
     float distance;
 
     float time2 = 0;
@@ -76,6 +90,7 @@ public class BossFSM : MonoBehaviour
     {
         Idle,
         Move,
+        Patrol,
         Groggy,
         Pattern_1,
         Pattern_2,
@@ -93,7 +108,12 @@ public class BossFSM : MonoBehaviour
         bossState = State.Idle;
 
         cc = gameObject.GetComponent<CharacterController>();
-        
+        BossRest = true;
+
+        //패트롤
+        waypointIndex = 0;
+        LookPatrolTarget();
+
     }
 
     void Update()
@@ -109,6 +129,9 @@ public class BossFSM : MonoBehaviour
 
         time += Time.deltaTime;
         time2 += Time.deltaTime;
+        BossHPCheck();
+
+
 
         //if (distance <= bossAttackDistance && bossState != State.Attack)
         //{
@@ -146,45 +169,61 @@ public class BossFSM : MonoBehaviour
                 move = Vector3.zero;
                 am.SetFloat("Runspeed", move.magnitude);
 
-                if (distance <= 2.0f)
+
+                if (BossRest != false)
                 {
-                    p2Check = true;
-                    bossState = State.Pattern_2;
-                    print("패턴2 실행");
+                    bossState = State.Patrol;
+                    print("보스 정찰 실행");
+                    am.SetFloat("Runspeed", move.magnitude);
+                    return;
                 }
+                else 
+                { 
 
-                if (distance > 2.0f && distance <= 8.0f)
-                {
-                    int p = Random.Range(0, 100);
-                    if (p >= 90)
+                {print("보스 정찰 안함");
+                    //
+                    bossState = State.Move;
+                    if (distance <= 2.0f)
                     {
-                        p1Check = true;
-                        bossState = State.Pattern_1;
-                        print("패턴1 실행");
-                    }
-                    else { bossState = State.Move; }
-                }
-
-                if (distance > 8.0f)
-                {
-                    int p = Random.Range(0, 100);
-
-                    if (p <= 20)
-                    {
-                        p1Check = true;
-                        bossState = State.Pattern_1;
-                        print("패턴1 실행");
-                    }
-                    else 
-                    {
-                        p3Check = true;
-                        p3MoveTime = 0;
-                        bossState = State.Pattern_3;
-                        print("패턴3 실행");
+                        p2Check = true;
+                        bossState = State.Pattern_2;
+                        print("패턴2 실행");
                     }
 
+                    if (distance > 2.0f && distance <= 8.0f)
+                    {
+                        int p = Random.Range(0, 100);
+                        if (p >= 90)
+                        {
+                            p1Check = true;
+                            bossState = State.Pattern_1;
+                            print("패턴1 실행");
+                        }
+                        else { bossState = State.Move; }
+                    }
+
+                    if (distance > 8.0f)
+                    {
+                        int p = Random.Range(0, 100);
+
+                        if (p <= 20)
+                        {
+                            p1Check = true;
+                            bossState = State.Pattern_1;
+                            print("패턴1 실행");
+                        }
+                        else
+                        {
+                            p3Check = true;
+                            p3MoveTime = 0;
+                            bossState = State.Pattern_3;
+                            print("패턴3 실행");
+                        }
+
+                    }
                 }
 
+                }
                 //if (Input.GetKeyDown(KeyCode.O))
                 //{
                 //    p1Check = true;
@@ -200,6 +239,7 @@ public class BossFSM : MonoBehaviour
                 break;
             case State.Move:
                 LookTarget();
+                print("너이리와");
                 move = new Vector3(target.transform.position.x - transform.position.x, 0, 
                     target.transform.position.z - transform.position.z);
                 move.Normalize();
@@ -253,6 +293,27 @@ public class BossFSM : MonoBehaviour
             case State.Dead:
                 OnDestroyBoss();
                 break;
+
+            case State.Patrol:
+                // 패트롤
+                //LookPatrolTarget();
+                
+                transform.LookAt(waypoints[waypointIndex].transform.position);
+                print("도주");
+
+                Transform RPoint = waypoints[waypointIndex];
+                Transform BPoint = gameObject.transform;
+                move = RPoint.position - BPoint.position;
+                move.Normalize();
+                dist = Vector3.Distance(BPoint.position, RPoint.position);
+                BossRecover();
+                if (dist < 5f)
+                {
+                    IncreaseIndex();
+
+                }
+                Patrol();
+                break;
         }        
         //  보스 hp가 0 밑으로 내려가지 않게 설정.
         HP = Mathf.Max(0, HP);
@@ -274,6 +335,13 @@ public class BossFSM : MonoBehaviour
     {
         transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
         
+    }
+
+    void LookPatrolTarget()
+    {
+        
+        transform.LookAt(waypoints[waypointIndex].position);
+
     }
 
     //  패턴1: 보스가 count 만큼의 투사체를 생성해 적에게 발사.
@@ -340,5 +408,51 @@ public class BossFSM : MonoBehaviour
     public void OffBossUI()
     {
         bossHpUI.SetActive(false);
+    }
+
+
+    void Patrol()
+    {
+        //print("움직임");
+        cc.Move(move * bossSpeed * Time.deltaTime);
+        am.SetFloat("Runspeed", move.magnitude);
+
+    }
+
+    void IncreaseIndex()
+    {
+        waypointIndex++;
+        if (waypointIndex >= waypoints.Length)
+        {
+
+            waypointIndex = 0;
+        }
+        transform.LookAt(waypoints[waypointIndex].position);
+    }
+
+    void BossHPCheck()
+    {
+        if (80 < HP && HP < 150)
+        {
+            BossRest = false;
+        }
+        else 
+        {
+            BossRest = true;
+           
+        }
+        
+
+    }
+
+    void BossRecover()
+    {
+        recoveryTime += Time.deltaTime;
+        if (recoveryTime >= 3.0f && HP < 100.0f)
+        {
+            HP += Time.deltaTime * 5.0f;
+            HP = Mathf.Min(100, HP);
+        }
+
     }
 }

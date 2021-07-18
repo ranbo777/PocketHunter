@@ -45,7 +45,7 @@ public class PlayerMove : MonoBehaviour
 
     public bool gamecamOn = true;
     //
-  
+
 
 
     Quaternion rotate;
@@ -69,7 +69,7 @@ public class PlayerMove : MonoBehaviour
         #region 플레이어 이동
         xInput = Input.GetAxisRaw("Horizontal");
         zInput = Input.GetAxisRaw("Vertical");
-        if(PlayerState.stunCheck == true)
+        if (PlayerState.stunCheck == true)
         {
             xInput = 0;
             zInput = 0;
@@ -78,8 +78,8 @@ public class PlayerMove : MonoBehaviour
         move = new Vector3(xInput, 0, zInput);
         move.Normalize();
 
-        if (gamecamOn != false) 
-            
+        if (gamecamOn != false)
+
         {
             move = Camera.main.transform.TransformDirection(move);
         }
@@ -90,7 +90,7 @@ public class PlayerMove : MonoBehaviour
         move.y = 0;
 
         //  플레이어 이동
-        if (check == false)
+        if (check == false && PlayerFire.burstModeSubCheck == false)
         {
             cc.Move(bossMove * Time.deltaTime);
             cc.Move(move * moveSpeed * Time.deltaTime);
@@ -101,14 +101,14 @@ public class PlayerMove : MonoBehaviour
         cc.Move(new Vector3(0, yVelocity, 0));
 
         //  대쉬 기능
-        if (Input.GetButton("Dash") && PlayerState.playerZoomCheck == false && ps.GetPlayerMP() >= 1.0f)
+        if (Input.GetButton("Dash") && PlayerState.playerZoomCheck == false && ps.GetPlayerMP() >= 1.0f && PlayerFire.burstModeSubCheck == false)
         {
-            if(!PlayerState.stunCheck == true)
+            if (!PlayerState.stunCheck == true)
             {
                 moveSpeed = temp * 2;
                 ps.AddPlayerMP(-Time.deltaTime * 4.0f);
             }
-            
+
         }
         else
         {
@@ -119,7 +119,7 @@ public class PlayerMove : MonoBehaviour
         //  플레이어 회전
         if (move != Vector3.zero && check == false)
         {
-            if (PlayerState.playerZoomCheck == false)
+            if (PlayerState.playerZoomCheck == false && PlayerFire.burstModeSubCheck == false)
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotate, 25.0f * Time.deltaTime);
             }
@@ -132,9 +132,9 @@ public class PlayerMove : MonoBehaviour
         {
             yVelocity = jumpPower;
         }
-               
+
         //  플레이어 회피        
-        if (time >= dodgeCooltime && check == false && move!=Vector3.zero)
+        if (time >= dodgeCooltime && check == false && move != Vector3.zero)
         {
             if (Input.GetButtonDown("Dodge") && ps.GetPlayerMP() >= 15.0f)
             {
@@ -142,6 +142,7 @@ public class PlayerMove : MonoBehaviour
                 check = true;
                 transform.rotation = rotate;
                 PlayerState.playerZoomCheck = false;
+                PlayerFire.burstModeSubCheck = false;
                 ps.AddPlayerMP(-15.0f);
                 time = 0;
 
@@ -163,10 +164,10 @@ public class PlayerMove : MonoBehaviour
         // 아이템 상호작용(F)
         if (Input.GetButtonDown("Interaction"))
         {
-           
+
             if (nearObject != null)
             {
-               
+
                 if (nearObject.tag == "Item")
                 {
                     Item item = nearObject.GetComponent<Item>();
@@ -208,7 +209,7 @@ public class PlayerMove : MonoBehaviour
 
         // 아이템 트리거
         if (other.tag == "Item")
-        {   
+        {
             nearObject = other.gameObject;
         }
         // 흔적 트리거
@@ -218,7 +219,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-  void Gamecamoff() 
+    void Gamecamoff()
     {
         gamecamOn = false;
     }
