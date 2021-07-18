@@ -18,7 +18,9 @@ public class Melee : MonoBehaviour
     public Type type;
     int damage;
     float rate;
-    public SphereCollider meleeArea;
+
+    
+    public BoxCollider meleeArea;
     public TrailRenderer trailEffect;
     bool fDown;
     bool fDown2;
@@ -77,14 +79,14 @@ public class Melee : MonoBehaviour
         IEnumerator Shoot()
         {
             //1
-            yield return new WaitForSeconds(0.1f); //1 프레임 대기
+            yield return new WaitForSeconds(0.1f); //0.1 프레임 대기
             meleeArea.enabled = true;
             trailEffect.enabled = true;
             //2
-            yield return new WaitForSeconds(0.5f); //1 프레임 대기
+            yield return new WaitForSeconds(0.5f); //0.5 프레임 대기
             meleeArea.enabled = false;
 
-            yield return new WaitForSeconds(0.6f); //1 프레임 대기
+            yield return new WaitForSeconds(0.6f); //0.6 프레임 대기
             trailEffect.enabled = false;
 
         }
