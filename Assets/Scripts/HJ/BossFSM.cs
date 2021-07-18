@@ -175,9 +175,11 @@ public class BossFSM : MonoBehaviour
         if(Input.GetKey(KeyCode.O))
             { bossState = State.Dead; }
 
+        if (Input.GetKey(KeyCode.P))
+        { bossState = State.Move; }
         //if (time2 >= 0.5f) { print(distance);  time2 = 0; }
 
-        if(HP <= 0)
+        if (HP <= 0)
         {
             bossState = State.Dead;
         }
