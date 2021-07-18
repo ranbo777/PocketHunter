@@ -206,7 +206,7 @@ public class BossFSM : MonoBehaviour
                     {
                         int p = Random.Range(0, 100);
 
-                        if (p <= 20)
+                        if (p <= 50)
                         {
                             p1Check = true;
                             bossState = State.Pattern_1;

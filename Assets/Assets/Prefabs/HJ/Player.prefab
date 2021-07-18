@@ -563,8 +563,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5ebb93fc69caec488f153bc8f7ed2c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMaxHP: 500
-  playerMaxMP: 100
+  playerMaxHP: 200
+  playerMaxMP: 200
   bF: {fileID: 0}
 --- !u!114 &4082872709735001133
 MonoBehaviour:
@@ -581,7 +581,7 @@ MonoBehaviour:
   bullet: {fileID: 3710256361937523277, guid: d76fd18f074d925429626a22be8fd2ba, type: 3}
   groggyValue: 1
   attackValue: 2
-  bulletDelay: 0.5
+  bulletDelay: 0.75
   burstDelay: 0
   burstMinDelay: 0.05
   sup: {fileID: 5379628270244559890}

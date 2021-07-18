@@ -9,7 +9,7 @@ public class PlayerFire : MonoBehaviour
     public float attackValue = 2.0f;
     public float bulletDelay = 0.75f;
 
-    public float burstDelay;
+    float burstDelay;
     public float burstMinDelay = 0.05f;
     public GameObject sup;
     GameManger gm;

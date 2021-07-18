@@ -1307,8 +1307,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0, z: 0}
-  bossSpeed: 3
-  maxBossHP: 150
+  bossSpeed: 5
+  maxBossHP: 100
   p1Bullet: {fileID: 6825090248882206603, guid: 770e4a588e6eac24f9a58b48bf59ecc9, type: 3}
   p2AttackValue: 10
   p2ColType: 0
