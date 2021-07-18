@@ -1307,17 +1307,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
-<<<<<<< HEAD
-  bossSpeed: 4
-=======
-  bossSpeed: 3
->>>>>>> parent of c35e3a0 (기타 수정)
-  maxBossHP: 150
-=======
   bossSpeed: 5
   maxBossHP: 100
->>>>>>> parent of 5c03c1e (HJ.Revert)
   p1Bullet: {fileID: 6825090248882206603, guid: 770e4a588e6eac24f9a58b48bf59ecc9, type: 3}
   p2AttackValue: 10
   p2ColType: 0
@@ -1328,15 +1319,6 @@ MonoBehaviour:
   - {fileID: 0}
   speed: 3
   BossRest: 1
-  Traces:
-  - {fileID: 4029805550222813907, guid: abc5e0c5ca77d20409faa174c4bacbbc, type: 3}
-  - {fileID: 1779279386326655046, guid: 1319ea7b486a1cb42a8f3cf7056555ed, type: 3}
-  - {fileID: 7671814787578282889, guid: 89ebc0ecdb9cc104888521d095506323, type: 3}
-  - {fileID: 7740187181606489903, guid: d3ad18209c214bc4ea5a0c8e32ca58fa, type: 3}
-  - {fileID: 3574412973235742111, guid: e7b21bff376e86645881eb84bcbd14b5, type: 3}
-  - {fileID: 624358934663148520, guid: 08972897f20a4b747a5790e0f02ecc40, type: 3}
-  BossSteps: 0
-  TraceDensity: 0
   BossItem: {fileID: 8782627306703031216, guid: 4b1d008a0f0a0a64d8fabc0fb6471538, type: 3}
   bossHpUI: {fileID: 0}
   bossState: 0

@@ -62,7 +62,7 @@ public class BossFSM : MonoBehaviour
     //보스 패트롤 변수
     float recoveryTime = 0;
     public Transform[] waypoints;
-    public float bossExitSpeed = 3.0f;
+    public int speed;
 
     private int waypointIndex;
     private float dist;
@@ -70,21 +70,6 @@ public class BossFSM : MonoBehaviour
 
     #endregion
 
-
-    #region 보스 흔적 드랍 변수
-
-
-    public GameObject[] Traces;
-    private int TracesIndex;
-    public int BossSteps;
-    public int TraceDensity; //흔적농도
-    float TraceLifeTime;
-    float TraceBirthTime = 0;
-
-
-    #endregion
-
-    int AwakeCounter = 0;
     float distance;
 
     float time2 = 0;
@@ -98,16 +83,14 @@ public class BossFSM : MonoBehaviour
 
     public GameObject BossItem;
     public GameObject bossHpUI;
-
+    
 
     //  보스 FSM
     public enum State
     {
-        Awake,
         Idle,
         Move,
         Patrol,
-        Nap,
         Groggy,
         Pattern_1,
         Pattern_2,
@@ -136,7 +119,6 @@ public class BossFSM : MonoBehaviour
     void Update()
     {
 
-
         yVelocity += gravity * Time.deltaTime;
 
         //cc.Move(new Vector3(0, yVelocity, 0));
@@ -150,11 +132,6 @@ public class BossFSM : MonoBehaviour
         BossHPCheck();
 
 
-        if (Input.GetKey(KeyCode.P))
-        {
-
-            bossState = State.Move;
-        }
 
         //if (distance <= bossAttackDistance && bossState != State.Attack)
         //{
@@ -167,7 +144,7 @@ public class BossFSM : MonoBehaviour
         //    bossState = State.Idle;
         //}
 
-        if (bossGroggyValue >= 15.0f && bossState != State.Pattern_3)
+        if (bossGroggyValue >= 10.0f && bossState != State.Pattern_3)
         {
             bossState = State.Groggy;
             am.SetBool("OnGroggy", true);
@@ -177,12 +154,12 @@ public class BossFSM : MonoBehaviour
 
         //if (time2 >= 0.5f) { print(distance);  time2 = 0; }
 
-        if (HP <= 0)
+        if(HP <= 0)
         {
             bossState = State.Dead;
         }
 
-        switch (bossState)
+        switch(bossState)
         {
             case State.Idle:
                 LookTarget();
@@ -200,51 +177,51 @@ public class BossFSM : MonoBehaviour
                     am.SetFloat("Runspeed", move.magnitude);
                     return;
                 }
-                else
-                {
+                else 
+                { 
 
-                    { print("보스 정찰 안함");
-
-                        //bossState = State.Move;
-                        if (distance <= 2.0f)
-                        {
-                            p2Check = true;
-                            bossState = State.Pattern_2;
-                            print("패턴2 실행");
-                        }
-
-                        if (distance > 2.0f && distance <= 8.0f)
-                        {
-                            int p = Random.Range(0, 100);
-                            if (p >= 90)
-                            {
-                                p1Check = true;
-                                bossState = State.Pattern_1;
-                                print("패턴1 실행");
-                            }
-                            else { bossState = State.Move; }
-                        }
-
-                        if (distance > 8.0f)
-                        {
-                            int p = Random.Range(0, 100);
-
-                            if (p <= 20)
-                            {
-                                p1Check = true;
-                                bossState = State.Pattern_1;
-                                print("패턴1 실행");
-                            }
-                            else
-                            {
-                                p3Check = true;
-                                p3MoveTime = 0;
-                                bossState = State.Pattern_3;
-                                print("패턴3 실행");
-                            }
-
-                        }
+                {print("보스 정찰 안함");
+                    //
+                    bossState = State.Move;
+                    if (distance <= 2.0f)
+                    {
+                        p2Check = true;
+                        bossState = State.Pattern_2;
+                        print("패턴2 실행");
                     }
+
+                    if (distance > 2.0f && distance <= 8.0f)
+                    {
+                        int p = Random.Range(0, 100);
+                        if (p >= 90)
+                        {
+                            p1Check = true;
+                            bossState = State.Pattern_1;
+                            print("패턴1 실행");
+                        }
+                        else { bossState = State.Move; }
+                    }
+
+                    if (distance > 8.0f)
+                    {
+                        int p = Random.Range(0, 100);
+
+                        if (p <= 50)
+                        {
+                            p1Check = true;
+                            bossState = State.Pattern_1;
+                            print("패턴1 실행");
+                        }
+                        else
+                        {
+                            p3Check = true;
+                            p3MoveTime = 0;
+                            bossState = State.Pattern_3;
+                            print("패턴3 실행");
+                        }
+
+                    }
+                }
 
                 }
                 //if (Input.GetKeyDown(KeyCode.O))
@@ -262,19 +239,17 @@ public class BossFSM : MonoBehaviour
                 break;
             case State.Move:
                 LookTarget();
-                BossRest = false;
                 print("너이리와");
-                move = new Vector3(target.transform.position.x - transform.position.x, 0,
+                move = new Vector3(target.transform.position.x - transform.position.x, 0, 
                     target.transform.position.z - transform.position.z);
                 move.Normalize();
-                am.SetFloat("Runspeed", move.magnitude);
+                am.SetFloat("Runspeed", move.magnitude);                
                 cc.Move(move * bossSpeed * Time.deltaTime);
-                if (distance <= 1.5f) { bossState = State.Idle; }
+                if(distance <= 1.5f) { bossState = State.Idle; }                                
                 break;
             case State.Groggy:
-                BossRest = false;
                 bossGroggyTime += Time.deltaTime;
-                if (bossGroggyTime >= 5.0f)
+                if(bossGroggyTime >= 5.0f)
                 {
                     bossGroggyValue = 0;
                     bossGroggyTime = 0;
@@ -284,30 +259,30 @@ public class BossFSM : MonoBehaviour
                 }
                 break;
             case State.Pattern_1:
-                if (p1Check == true)
+                if(p1Check == true) 
                 {
                     am.SetBool("OnShoot", true);
                     p1Check = false;
                     Invoke("ReturnState", 4.0f);
-                }
+                }                
                 break;
             case State.Pattern_2:
-                if (p2Check == true)
+                if(p2Check == true)
                 {
                     Pattern_2();
                     p2Check = false;
-                    Invoke("ReturnState", 2.5f);
+                    Invoke("ReturnState", 2.5f);                    
                 }
                 break;
             case State.Pattern_3:
                 p3MoveTime += Time.deltaTime;
                 move = new Vector3(target.transform.position.x - transform.position.x, 0,
-                    target.transform.position.z - transform.position.z);
-                if (p3MoveTime >= 0.5f && p3MoveTime <= 1.5f)
+                    target.transform.position.z - transform.position.z);                
+                if(p3MoveTime >= 0.5f && p3MoveTime <= 1.5f)
                 {
                     LookTarget();
                     cc.Move(move * 2.0f * Time.deltaTime);
-                }
+                }                
                 if (p3Check == true)
                 {
                     p3Check = false;
@@ -322,7 +297,7 @@ public class BossFSM : MonoBehaviour
             case State.Patrol:
                 // 패트롤
                 //LookPatrolTarget();
-
+                
                 transform.LookAt(waypoints[waypointIndex].transform.position);
                 print("도주");
 
@@ -330,26 +305,16 @@ public class BossFSM : MonoBehaviour
                 Transform BPoint = gameObject.transform;
                 move = RPoint.position - BPoint.position;
                 move.Normalize();
-                BossRecover2();
-                TraceDrop();
                 dist = Vector3.Distance(BPoint.position, RPoint.position);
+                BossRecover();
                 if (dist < 5f)
                 {
                     IncreaseIndex();
-                    if (HP < 80)
-                    {
-                        bossState = State.Nap;
-                    }
+
                 }
                 Patrol();
                 break;
-            case State.Nap:
-                BossNap();
-                break;
-            case State.Awake:
-                BossAwake();
-                break;
-        }
+        }        
         //  보스 hp가 0 밑으로 내려가지 않게 설정.
         HP = Mathf.Max(0, HP);
     }
@@ -360,51 +325,12 @@ public class BossFSM : MonoBehaviour
         HP -= playerAttackValue;
         bossGroggyValue += playerGroggyValue;
     }
-    public void TakeMeleeDamage(float playerAttackValue, float playerGroggyValue)
+
+    public void TakeMeleeDamage(float x)
     {
-        HP -= playerAttackValue;
-        bossGroggyValue += playerGroggyValue;
+        HP -= x;
     }
 
-    //public void TakeMeleeDamage(float x)
-    //{
-    //    HP -= x;
-    //}
-
-
-    public void BossNap()
-    {
-        StopCoroutine(Nap());
-        StartCoroutine(Nap());
-
-
-        //if (type == Type.Melee)
-        //{
-        IEnumerator Nap()
-        {
-            am.SetBool("OnShoot", false);
-            am.SetFloat("Runspeed", 0);
-            yield return new WaitForSeconds(1f); //1 프레임 대기
-            move = Vector3.zero;
-            am.SetBool("OnGroggy", true);
-            BossRecover();
-            yield return new WaitForSeconds(2f); //2 프레임 대기
-            BossRecover();
-            yield return new WaitForSeconds(3f); //3 프레임 대기
-            am.SetBool("OnGroggy", false);
-            am.SetBool("OnIdle", true);
-            bossState = State.Awake;
-        }
-
-    }
-
-    public void BossAwake()
-    {
-        BossRest = false;
-        bossState = State.Idle;
-    }
-
- 
     void LookTarget()
     {
         transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
@@ -485,15 +411,15 @@ public class BossFSM : MonoBehaviour
     }
 
 
-    void Patrol() // 정찰
+    void Patrol()
     {
         //print("움직임");
-        cc.Move(move * bossExitSpeed * Time.deltaTime);
+        cc.Move(move * bossSpeed * Time.deltaTime);
         am.SetFloat("Runspeed", move.magnitude);
 
     }
 
-    void IncreaseIndex() // 정찰 루트 배열
+    void IncreaseIndex()
     {
         waypointIndex++;
         if (waypointIndex >= waypoints.Length)
@@ -504,82 +430,29 @@ public class BossFSM : MonoBehaviour
         transform.LookAt(waypoints[waypointIndex].position);
     }
 
-    
-
-    void BossHPCheck() // 보스 체력 체크
+    void BossHPCheck()
     {
-        if (50 < HP && HP < 150)
+        if (80 < HP && HP < 150)
         {
             BossRest = false;
-
-        }
-        else if (HP == 150 && AwakeCounter < 2)
-        {
-            bossState = State.Awake;
-            AwakeCounter += 1;
         }
         else 
         {
             BossRest = true;
-            AwakeCounter = 0;
+           
         }
         
 
     }
 
-    void BossRecover() // 보스 낮잠(nap) 시 체력 회복
+    void BossRecover()
     {
         recoveryTime += Time.deltaTime;
-        if (recoveryTime >= 3.0f && HP < 150.0f)
+        if (recoveryTime >= 3.0f && HP < 100.0f)
         {
             HP += Time.deltaTime * 5.0f;
             HP = Mathf.Min(100, HP);
         }
 
     }
-
-    void BossRecover2() // 보스 도주 시 체력 회복
-    {
-        recoveryTime += Time.deltaTime;
-        if (recoveryTime >= 3.0f && HP < 80.0f)
-        {
-            HP += Time.deltaTime * 2.0f;
-            HP = Mathf.Min(100, HP);
-        }
-
-    }
-
-    void TraceDrop() // 흔적 드랍 카운터
-    {
-        TraceBirthTime += Time.deltaTime;
-
-        print(TraceBirthTime);
-        if (TraceBirthTime >= 5.0f) 
-        {
-            GameObject Poo = Traces[TracesIndex];
-            Vector3 dir = new Vector3(0, 2, -2); 
-            Poo.transform.position = transform.position + dir;
-            Instantiate(Poo);
-            TraceIndexNext();
-
-            TraceBirthTime = 0;
-        }
-        
-    }
-
-
-    void TraceIndexNext() // 흔적 배열
-    {
-        TracesIndex++;
-        if (TracesIndex >= Traces.Length)
-        {
-
-            TracesIndex = 0;
-        }
-       
-    }
-
-   
-
-
 }

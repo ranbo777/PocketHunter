@@ -37,8 +37,8 @@ public class PlayerState : MonoBehaviour
     {
         playerHP = playerMaxHP;
         playerMP = playerMaxMP;
-        
-        if(bF == null) { bF = GameObject.Find("Boss").GetComponent<BossFSM>(); }
+
+        if (bF == null) { bF = GameObject.Find("Boss").GetComponent<BossFSM>(); }
         pm = gameObject.GetComponent<PlayerMove>();
         gm = GameObject.Find("GameManager").GetComponent<GameManger>();
         playerState = 0b_1111;
@@ -52,8 +52,15 @@ public class PlayerState : MonoBehaviour
         {
             if (time >= 0.2f)
             {
-                if (playerZoomCheck == false && pm.check == false) { playerZoomCheck = true; print("¡‹ On"); }
-                else { playerZoomCheck = false; print("¡‹ Off"); }
+                if (playerZoomCheck == false && pm.check == false && stunCheck == false) { playerZoomCheck = true; print("¡‹ On"); }
+                else if (PlayerFire.burstModeSubCheck == false)
+                {
+                    playerZoomCheck = false;
+                    print("¡‹ Off");
+                }
+
+
+
                 time = 0;
             }
         }
@@ -63,23 +70,23 @@ public class PlayerState : MonoBehaviour
 
         //  MP »∏∫π
         recoveryMPTime += Time.deltaTime;
-        if(recoveryMPTime >= 3.0f && playerMP < 100.0f)
+        if (recoveryMPTime >= 3.0f && playerMP < playerMaxMP)
         {
             playerMP += Time.deltaTime * 5.0f;
-            playerMP = Mathf.Min(100, playerMP);
+            playerMP = Mathf.Min(playerMaxMP, playerMP);
         }
 
         #region «√∑π¿ÃæÓ Ω∫≈œ
-        if (playerStunGauge >= 5.0f)
+        if (playerStunGauge >= 10.0f)
         {
-            if((playerState & 0b_0001) == 0b_0001)
+            if ((playerState & 0b_0001) == 0b_0001)
             {
                 playerState -= 0b_0001;
                 PlayerStun(0b_0001);
-                playerStunGauge = 0;               
+                playerStunGauge = 0;
             }
         }
-        if(stunCheck == true)
+        if (stunCheck == true)
         {
             playerStunGauge = 0;
         }
@@ -89,22 +96,23 @@ public class PlayerState : MonoBehaviour
     IEnumerator ReturnState(int value)
     {
         yield return new WaitForSeconds(3.0f);
-        gm.stunEffect.gameObject.SetActive(false);        
+        gm.stunEffect.gameObject.SetActive(false);
         playerState += value;
-        if(value == 0b_0001)
+        if (value == 0b_0001)
         {
             stunCheck = false;
         }
         print("ªÛ≈¬ µ«µπæ∆ø»");
     }
-    
+
     void PlayerStun(int value)
     {
         print("Ω∫≈œ∞…∏≤");
+        PlayerFire.burstModeSubCheck = false;
         playerZoomCheck = false;
         stunCheck = true;
         gm.stunEffect.gameObject.SetActive(true);
-        
+
         StartCoroutine(ReturnState(value));
     }
 
@@ -156,7 +164,7 @@ public class PlayerState : MonoBehaviour
     {
         if (other.gameObject.tag.Equals("BossAttackCol"))
         {
-            if(noHitCheck == false)
+            if (noHitCheck == false)
             {
                 if (bF.p2ColType == true)
                 {

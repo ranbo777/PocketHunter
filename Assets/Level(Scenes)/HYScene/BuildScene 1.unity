@@ -594,7 +594,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1032796507480970854, guid: 7cb8c88bf066e7c4dad51ef3c1fae0bf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.13
+      value: 1.9
       objectReference: {fileID: 0}
     - target: {fileID: 1590566781793383800, guid: 7cb8c88bf066e7c4dad51ef3c1fae0bf, type: 3}
       propertyPath: m_Name
@@ -602,7 +602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4169354396053024000, guid: 7cb8c88bf066e7c4dad51ef3c1fae0bf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.66
+      value: -0.62
       objectReference: {fileID: 0}
     - target: {fileID: 4968595868582103120, guid: 7cb8c88bf066e7c4dad51ef3c1fae0bf, type: 3}
       propertyPath: m_RootOrder
@@ -2714,70 +2714,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of 5c03c1e (HJ.Revert)
-    - target: {fileID: 3876764646736189847, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
-      propertyPath: m_Name
-      value: Tail
-      objectReference: {fileID: 0}
-    - target: {fileID: 8304118235389948563, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
-      propertyPath: m_Name
-      value: Collision
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of bd445c9 (수정)
-=======
->>>>>>> parent of bd445c9 (수정)
-    - target: {fileID: 612584632, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 612584632, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 612584632, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 612584632, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 612584635, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of bd445c9 (수정)
-=======
->>>>>>> parent of bd445c9 (수정)
-=======
->>>>>>> parent of bd445c9 (수정)
-=======
-    - target: {fileID: 292568768, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
-      propertyPath: m_SlopeLimit
-      value: 60
->>>>>>> parent of a29f601 (Merge branch 'main' of https://github.com/ranbo777/PocketHunter into main)
-=======
->>>>>>> parent of 5c03c1e (HJ.Revert)
-      objectReference: {fileID: 0}
-=======
->>>>>>> parent of a36ec35 (0718 _JY)
     - target: {fileID: 8423039338927317963, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8423039338927317963, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.223805
+      value: -8.98
       objectReference: {fileID: 0}
     - target: {fileID: 8423039338927317963, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2785,23 +2728,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8423039338927317963, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 188.4135
+      value: 158.82
       objectReference: {fileID: 0}
     - target: {fileID: 8423039338927317963, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.19791745
+      value: 0.72348547
       objectReference: {fileID: 0}
     - target: {fileID: 8423039338927317963, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8423039338927317963, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9802187
+      value: 0.6903396
       objectReference: {fileID: 0}
     - target: {fileID: 8423039338927317963, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8423039338927317963, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2809,7 +2752,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8423039338927317963, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 157.17
+      value: 87.314
       objectReference: {fileID: 0}
     - target: {fileID: 8423039338927317963, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -2819,10 +2762,6 @@ PrefabInstance:
       propertyPath: bossHpUI
       value: 
       objectReference: {fileID: 802354313}
-    - target: {fileID: 8423039338927317966, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
-      propertyPath: maxBossHP
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 8423039338927317966, guid: 6b2fc0e6ac850f14bb8c58a62b57b3a2, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
@@ -3123,90 +3062,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -2340587333429806397, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
-      propertyPath: m_SlopeLimit
-      value: 45
-      objectReference: {fileID: 0}
     - target: {fileID: 1201882768, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
       propertyPath: bF
       value: 
       objectReference: {fileID: 1967456101}
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of bd445c9 (수정)
-=======
->>>>>>> parent of bd445c9 (수정)
-    - target: {fileID: 1436745032, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
-      propertyPath: am2
-      value: 
-      objectReference: {fileID: 7400000, guid: 195b96385195d1b45a147fec16a0a916, type: 2}
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of bd445c9 (수정)
-=======
->>>>>>> parent of bd445c9 (수정)
-=======
->>>>>>> parent of bd445c9 (수정)
-=======
-    - target: {fileID: 1201882768, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
-      propertyPath: playerMaxHP
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 1201882768, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
-      propertyPath: playerMaxMP
-      value: 200
-      objectReference: {fileID: 0}
->>>>>>> parent of a29f601 (Merge branch 'main' of https://github.com/ranbo777/PocketHunter into main)
-=======
->>>>>>> parent of 5c03c1e (HJ.Revert)
     - target: {fileID: 328035929963748865, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
       propertyPath: gm
       value: 
       objectReference: {fileID: 498011346}
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of bd445c9 (수정)
-=======
->>>>>>> parent of bd445c9 (수정)
-    - target: {fileID: 328035929963748865, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
-      propertyPath: equipWeapon
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2108763743423544024, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4601953353689711024, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
->>>>>>> parent of bd445c9 (수정)
-=======
-    - target: {fileID: 4082872709735001133, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
-      propertyPath: bulletDelay
-      value: 0.75
-      objectReference: {fileID: 0}
->>>>>>> parent of a29f601 (Merge branch 'main' of https://github.com/ranbo777/PocketHunter into main)
-=======
->>>>>>> parent of 5c03c1e (HJ.Revert)
     - target: {fileID: 4623847553639675663, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
       propertyPath: bF
       value: 
       objectReference: {fileID: 1967456101}
-    - target: {fileID: 4623847553639675663, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
-      propertyPath: rate
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 6040402669269089958, guid: 5676a8b119bd0624480c2db3f93e5b8b, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -4063,7 +3930,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4968595868582103120, guid: 7cb8c88bf066e7c4dad51ef3c1fae0bf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -20.2
+      value: -19.9
       objectReference: {fileID: 0}
     - target: {fileID: 4968595868582103120, guid: 7cb8c88bf066e7c4dad51ef3c1fae0bf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4202,7 +4069,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1052830734
 Transform:
   m_ObjectHideFlags: 0
@@ -4572,7 +4439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4169354396053024000, guid: 7cb8c88bf066e7c4dad51ef3c1fae0bf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.97
+      value: -2.83
       objectReference: {fileID: 0}
     - target: {fileID: 4968595868582103120, guid: 7cb8c88bf066e7c4dad51ef3c1fae0bf, type: 3}
       propertyPath: m_RootOrder
@@ -4584,7 +4451,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4968595868582103120, guid: 7cb8c88bf066e7c4dad51ef3c1fae0bf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -19.13
+      value: -18.028353
       objectReference: {fileID: 0}
     - target: {fileID: 4968595868582103120, guid: 7cb8c88bf066e7c4dad51ef3c1fae0bf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4620,7 +4487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6269491064423682785, guid: 7cb8c88bf066e7c4dad51ef3c1fae0bf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.02
+      value: -2.09
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cb8c88bf066e7c4dad51ef3c1fae0bf, type: 3}
